@@ -131,70 +131,90 @@
   <!-- end dashbaord header -->
 </header>
 
-<div class="nav-left-sidebar sidebar-dark">
-  <div class="menu-list">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav flex-column">
-          <li class="nav-divider">
-            My E-Visa
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link active" routerLink="/home/dashboard" aria-expanded="false" data-target="#submenu-1"
-              aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Home <span
-                class="badge badge-success">6</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2"
-              aria-controls="submenu-2" [matMenuTriggerFor]="menu" ><i class="fa fa-fw fa-rocket"></i>Applications</a>
-            <mat-menu #menu="matMenu" yPosition="below">
-              <button mat-menu-item><a class="nav-link" href="pages/newapplication.html">Apply New Application</a></button>
-              <button mat-menu-item><a class="nav-link" href="pages/applicationlist.html">Application List</a></button>
-              <button mat-menu-item><a class="nav-link" href="#">Walk in Applicant List</a></button>
-              <button mat-menu-item><a class="nav-link" href="#">Pending Application Process</a></button>
-              <button mat-menu-item><a class="nav-link" href="#">New Appointment</a></button>
-              <button mat-menu-item><a class="nav-link" href="#">Visa Approved List</a></button>
-              <button mat-menu-item><a class="nav-link" href="#">Visa Reject List</a></button>
-            </mat-menu>
-          </li>
+<div class="dashboard-main-wrapper">
+  <!-- ============================================================== -->
+  <!-- left sidebar -->
+  <!-- ============================================================== -->
+  <div class="nav-left-sidebar sidebar-dark">
+    <div class="menu-list">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav flex-column">
+            <li class="nav-divider">
+              My E-Visa
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link active" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"
+                routerLink="/home/dashboard"><i class="fa fa-fw fa-user-circle"></i>Home <span
+                  class="badge badge-success">6</span></a>
 
-          <li class="nav-item ">
-            <a class="nav-link" href="#" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
-                class="fab fa-fw fa-wpforms"></i>Administration</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2"
+                aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Applications</a>
+              <div id="submenu-2" class="collapse submenu">
+                <ul class="nav flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/newapplication.html">Apply New Application</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/applicationlist.html">Application List</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Walk in Applicant List</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Pending Application Process</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">New Appointment</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Visa Approved List</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Visa Reject List</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="#" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
+                  class="fab fa-fw fa-wpforms"></i>Administration</a>
 
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i
-                class="fas fa-fw fa-table"></i>Device Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i
+                  class="fas fa-fw fa-table"></i>Device Settings</a>
 
-          </li>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="#" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
+                  class="fab fa-fw fa-wpforms"></i>Check Application Status </a>
 
-          <li class="nav-item ">
-            <a class="nav-link" href="#" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
-                class="fab fa-fw fa-wpforms"></i>Check Application Status </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i
+                  class="fas fa-fw fa-table"></i>Help/Support</a>
 
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i
-                class="fas fa-fw fa-table"></i>Help/Support</a>
-
-          </li>
-
-        </ul>
-      </div>
-    </nav>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
   </div>
 </div>
 
-<div class="content">
-  <router-outlet></router-outlet>
-</div>
+<!-- <div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce"> -->
+    <router-outlet></router-outlet>
+  <!-- </div>
+</div> -->
 
 <footer class="">
   <div class="container-fluid">
