@@ -8,6 +8,9 @@ import { NewApplicationComponent } from './components/new-application/new-applic
 
 export const routes: Routes = [
   {
+    path: '', redirectTo: 'dashboard', pathMatch: 'full'
+  },
+  {
     path: 'home',
     component: HomeComponent,
     children: [
