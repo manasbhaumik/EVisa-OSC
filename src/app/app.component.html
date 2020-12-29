@@ -156,14 +156,61 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2"
+                aria-controls="submenu-2" [matMenuTriggerFor]="afterMenuApplication"><i
+                  class="fa fa-fw fa-rocket"></i>Applications</a>
+              <div id="submenu-2" class="collapse submenu">
+                <mat-menu #afterMenuApplication="matMenu" class="custom-dropmenu" xPosition="after">
+                  <ul class="nav flex-column">
+                    <li class="nav-item">
+                      <button mat-menu-item routerLink="/home/application/new-application">
+                        <a class="nav-link">Apply New Application</a>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button mat-menu-item routerLink="/home/application/list-application">
+                        <a class="nav-link">Application List</a>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button mat-menu-item>
+                        <a class="nav-link" href="#">Walk in Applicant List</a>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button mat-menu-item>
+                        <a class="nav-link" href="#">Pending Application Process</a>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button mat-menu-item>
+                        <a class="nav-link" href="#">New Appointment</a>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button mat-menu-item>
+                        <a class="nav-link" href="#">Visa Approved List</a>
+                      </button>
+                    </li>
+                    <li class="nav-item">
+                      <button mat-menu-item>
+                        <a class="nav-link" href="#">Visa Reject List</a>
+                      </button>
+                    </li>
+                  </ul>
+                </mat-menu>
+
+              </div>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2"
                 aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Applications</a>
               <div id="submenu-2" class="collapse submenu">
                 <ul class="nav flex-column">
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/newapplication.html">Apply New Application</a>
+                    <a class="nav-link">Apply New Application</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/applicationlist.html">Application List</a>
+                    <a class="nav-link">Application List</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Walk in Applicant List</a>
@@ -182,7 +229,7 @@
                   </li>
                 </ul>
               </div>
-            </li>
+            </li> -->
             <li class="nav-item ">
               <a class="nav-link" href="#" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
                   class="fab fa-fw fa-wpforms"></i>Administration</a>
@@ -210,26 +257,29 @@
   </div>
 </div>
 
-<!-- <div class="dashboard-wrapper">
-  <div class="dashboard-ecommerce"> -->
+<div class="dashboard-wrapper">
+  <div class="dashboard-ecommerce">
     <router-outlet></router-outlet>
-  <!-- </div>
-</div> -->
 
-<footer class="">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-        Copyright © 2020 Red Connection Sdn. Bhd. All rights reserved. Dashboard by <a href="https://redconn.com.my">Red
-          Connection</a>.
-      </div>
-      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-        <div class="text-md-right footer-links d-none d-sm-block">
-          <a href="javascript: void(0);">About</a>
-          <a href="javascript: void(0);">Support</a>
-          <a href="javascript: void(0);">Contact Us</a>
+
+    <footer class="">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            Copyright © 2020 Red Connection Sdn. Bhd. All rights reserved. Dashboard by <a
+              href="https://redconn.com.my">Red
+              Connection</a>.
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="text-md-right footer-links d-none d-sm-block">
+              <a href="javascript: void(0);">About</a>
+              <a href="javascript: void(0);">Support</a>
+              <a href="javascript: void(0);">Contact Us</a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </footer>
+    
   </div>
-</footer>
+</div>
