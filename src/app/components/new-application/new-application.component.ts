@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-new-application',
@@ -6,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-application.component.css']
 })
 export class NewApplicationComponent implements OnInit {
+
+  panelOpenState = false;
+
+  // private id: string;
+  // public form: FormGroup;
+  // public isNew: boolean;
+  public isLoading = true;
+
 
   constructor() { }
 
