@@ -8,12 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class NewApplicationComponent implements OnInit {
 
-  panelOpenState = false;
-
-  // private id: string;
-  // public form: FormGroup;
-  // public isNew: boolean;
-  public isLoading = true;
+  labelPosition: 'before' | 'after' = 'after';
 
 
   constructor() { }

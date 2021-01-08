@@ -11,7 +11,7 @@ import { ApplicationComponent } from './components/application/application.compo
 import { NewApplicationComponent } from './components/new-application/new-application.component';
 import { ListApplicationComponent } from './components/list-application/list-application.component';
 import { MatTreeModule } from '@angular/material/tree';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -29,9 +29,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
   imports: [
     BrowserModule,
     AppRoutingModule,
+
     FormsModule,
-    MatMenuModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
+
+    MatMenuModule,
     MatTreeModule,
     MatRadioModule,
     MatInputModule,
