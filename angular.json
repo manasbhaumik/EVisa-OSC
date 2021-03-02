@@ -25,12 +25,24 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "src/assets/vendor/bootstrap/js/bootstrap.bundle.js",
+              "src/assets/vendor/slimscroll/jquery.slimscroll.js",
+              "src/assets/libs/js/main-js.js"
+             
+            ]
           },
           "configurations": {
             "production": {
@@ -50,8 +62,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -91,22 +103,11 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+             
               "src/styles.css"
             ],
-            "scripts": [
-              "src/assets/vendor/jquery/jquery-3.3.1.min.js",
-              "src/assets/vendor/bootstrap/js/bootstrap.bundle.js",
-              "src/assets/vendor/slimscroll/jquery.slimscroll.js",
-              "src/assets/libs/js/main-js.js",
-              "src/assets/vendor/charts/chartist-bundle/chartist.min.js",
-              "src/assets/vendor/charts/sparkline/jquery.sparkline.js",
-              "src/assets/vendor/charts/morris-bundle/raphael.min.js",
-              "src/assets/vendor/charts/morris-bundle/morris.js",
-              "src/assets/vendor/charts/c3charts/c3.min.js",
-              "src/assets/vendor/charts/c3charts/d3-5.4.0.min.js",
-              "src/assets/vendor/charts/c3charts/C3chartjs.js",
-              "src/assets/libs/js/dashboard-ecommerce.js"
-            ]
+            "scripts": []
           }
         },
         "lint": {

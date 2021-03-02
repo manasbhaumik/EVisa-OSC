@@ -1,0 +1,98 @@
+<app-master-page></app-master-page>
+<div class="dashboard-wrapper">
+    <div class="container-fluid  dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title">BIOMETRIC SUBMITTED LIST</h2>
+                    <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <!-- <div class="card-header">
+                        <h5 class="mb-0">Data Tables - Print, Excel, CSV, PDF</h5>
+                        
+                    </div> -->
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="datatableexample" class="table table-striped table-bordered second" style="width:100%">
+                            <!-- <table id="example"  class="table table-striped table-bordered second row-border hover" style="width:100%"> -->
+                                <thead>
+                                    <tr>
+                                        <th>Visa Reference Number</th>
+                                        <th>Name</th>
+                                        <th>Type of visa</th>
+                                        <th>Processing Time</th>
+                                        <th>Date</th>
+                                        <th>View</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr *ngFor="let application of ApplicationList; let i = index">
+                                        <td>
+                                            {{application.MyEVisaRefNo}}
+                                        </td>
+                                        <td>{{application.FullName}}</td>
+                                        <td>{{application.PurposeOfVisit}}</td>
+                                        <td>{{application.ApplicationType}}</td>
+                                        <td>{{application.SubmissionDate |date:'dd/MM/yyyy'}}</td>
+                                        <td>
+                                            <a [routerLink]="" (click)="viewPhoto(application.MyEVisaRefNo)" data-toggle="modal" data-target="#exampleModal"> 
+                                                View
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button type="submit"  class="btn btn-primary">Approved</button>&nbsp;
+                                            <button type="submit"  class="btn btn-danger">Reject</button>
+                                        </td>
+
+                                    </tr>
+                                    
+                                    
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Visa Reference Number</th>
+                                        <th>Name</th>
+                                        <th>Type of visa</th>
+                                        <th>Processing Time</th>
+                                        <th>Date</th>
+                                        <th>View</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div *ngIf="divDisplayImage">
+            
+        </div> -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">FACE CAPTURE</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img [src]="faceData" style="height: 300px; width:250px" />
+                            </div>
+                            <!-- <div class="col-md-6"></div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

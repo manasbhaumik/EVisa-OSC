@@ -1,0 +1,749 @@
+<app-master-page></app-master-page>
+<div class="dashboard-wrapper">
+    <div class="container-fluid  dashboard-content">
+        <!-- ============================================================== -->
+        <!-- pageheader -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title">BIOMETRIC ENROLLMENT & VERIFICATION</h2>
+                    <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                          
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end pageheader -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <h5 class="card-header">Search Visa Reference Number</h5>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row d-flex justify-content-center ">
+                                <form class="needs-validation" [formGroup]="applicantInfoForm" (ngSubmit)="getApplicantInfo()" >
+                                    <div class="row">
+                                        <div class="form-group row">
+                                            <div class="col-md-4">Applicant Reference Number</div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" formControlName="visaRefNo" placeholder="" [ngClass]="{ 'is-invalid': isSubmitted && f.visaRefNo.errors }"> 
+                                                <div *ngIf="isSubmitted && f.visaRefNo.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.visaRefNo.errors.required">Applicant Reference Number Required</div>                                    
+                                                </div>
+                                           </div>
+                                           <div class="col-md-2">
+                                            <!-- <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enter</button>  -->
+                                            <button type="submit" class="btn btn-primary" >Enter</button> 
+
+                                           </div>
+                                           
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <!-- <button type="submit" class="btn btn-primary" (click)="displayImage()" >Dispaly Image</button>  -->
+    
+                                               </div>
+
+                                        </div>
+                                        <div class="row  mt-3" >
+                                            <div class="col-md-6">
+                                                <img [src]="faceData" />
+                                                <!-- <img [src]="'data:image/jpeg;base64,'+imageurl" /> -->
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </form>
+                            </div> 
+                            <div *ngIf="divApplicationInfo" >
+                                <form>
+                                    <div class="form-group row">
+                                        <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-right">Country Code</label>
+                                        <div class="col-sm-9">
+                                            <label class="form-control form-control-sm" #txtCountryCode>{{countryCode}}</label>
+                                          <!-- <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="col-form-label-sm"> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-3 col-form-label text-right">Year</label>
+                                        <div class="col-sm-9">
+                                            <label class="form-control form-control-sm" #txtYear>{{year}}</label>
+                                          <!-- <input type="email" class="form-control" id="colFormLabel" placeholder="col-form-label"> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">Month</label>
+                                        <div class="col-sm-9">
+                                            <label class="form-control form-control-sm col-form-label" #txtMonth>{{month}}</label>
+                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">IOA Code</label>
+                                        <div class="col-sm-9">
+                                            <label class="form-control form-control-sm col-form-label" #txtIOACode>{{ioaCode}}</label>
+                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">Running Number</label>
+                                        <div class="col-sm-9">
+                                            <label class="form-control form-control-sm col-form-label" #txtRunningNo>{{rNo}}</label>
+                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">National Identity Card Number</label>
+                                        
+                                        <div class="col-sm-9">
+                                            <label class="form-control form-control-sm col-form-label" #txtNRICNo>{{nricNo}}</label>
+                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">International Passport</label>
+                                        <div class="col-sm-9">
+                                            <label class="form-control form-control-sm col-form-label" #txtPassportNo>{{passportNo}}</label>
+                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">Applicant Name</label>
+                                        <div class="col-sm-9">
+                                            <label class="form-control form-control-sm col-form-label" #txtName>{{applicantName}}</label>
+                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <div class="form-row">
+                                            <div class="col text-right">
+                                                Country Code: <label #txtCountryCode>{{countryCode}}</label>
+                                            </div>
+                                            <div class="col">
+                                              Year : <label #txtYear>{{year}}</label>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col text-right">
+                                                Month: <label #txtMonth>{{month}}</label>
+                                            </div>
+                                            <div class="col">
+                                              IOA Code : <label #txtIOACode>{{ioaCode}}</label>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-row">
+                                            <div class="col text-right">
+                                                Running Number: <label #txtRunningNo>{{rNo}}</label>
+                                            </div>
+                                            <div class="col">
+                                                National Identity Card Number : <label #txtNRICNo>{{nricNo}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col text-right">
+                                                International Passport: <label #txtPassportNo>{{passportNo}}</label>
+                                            </div>
+                                            <div class="col">
+                                                Applicant Name : <label #txtName>{{applicantName}}</label>
+                                            </div>
+                                        </div>
+                                    </div> -->                                 
+                                   
+
+
+                                    <!-- <div class="row d-flex justify-content-center">
+                                            <div class="form-group row">                                                
+                                                 <div class="col"> Country Code :  <label #txtCountryCode>{{countryCode}}</label></div>
+                                            
+                                            </div> 
+                                           
+                                    </div>  
+                                    <div class="row d-flex justify-content-center">
+                                    
+                                        <div class="form-group row">                                                
+                                            <div class="col"> Year :  <label #txtYear>{{year}}</label></div> 
+                                           
+                                                                                    
+                                       </div>   
+                                   </div>   -->
+
+                                      
+                                    <!-- <div class="row d-flex justify-content-center">
+                                            <div class="form-group row">                                                
+                                                 <div class="col-md-8">Year : </div>
+                                                
+                                                <div class="col-md-4">
+                                                    <label #txtYear>{{year}}</label>
+                                                </div>                                                                                              
+                                            </div>   
+                                    </div> -->
+                                    <!-- <div class="row d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="form-group row">                                                
+                                                 <div class="col-md-5"> Month</div>
+                                                <div class="col-md-1">:</div>
+                                                <div class="col-md-6">
+                                                    <label #txtMonth>{{month}}</label>
+                                                </div>                                                                                              
+                                            </div>   
+                                                                                    
+                                        </div>    
+                                    </div>   -->
+                                    <!-- <div class="row d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="form-group row">                                                
+                                                 <div class="col-md-5"> IOA Code</div>
+                                                <div class="col-md-1">:</div>
+                                                <div class="col-md-6">
+                                                    <label #txtIOACode>{{ioaCode}}</label>
+                                                </div>                                                                                              
+                                            </div>   
+                                                                                    
+                                        </div>    
+                                    </div>                                    -->
+                                       
+                                    <!-- <div class="row d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="form-group row">                                                
+                                                <div class="col-md-6">
+                                                    <label>Month</label>
+                                                    <input type="text" class="form-control" disabled  #txtMonth>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>IOA Code</label>
+                                                    <input type="text" class="form-control" disabled  #txtIOACode>
+                                                </div>
+                                            </div>   
+                                                                                    
+                                        </div>    
+                                    </div> -->
+                                    
+                                    <!-- <div class="row d-flex justify-content-center">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">Running Number</div>
+                                            <div class="col-md-1">:</div>
+                                             <div class="col-md-4"> 
+                                                
+                                                <label #txtRunningNo>{{rNo}}</label>
+                                            </div>
+                                        </div>  
+                                    </div> -->
+                                   
+                                    <!-- <div class="row d-flex justify-content-center">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">National Identity Card Number</div>
+                                            <div class="col-md-1">:</div>
+                                             <div class="col-md-4"> 
+                                                
+                                                <label #txtNRICNo>{{nricNo}}</label>
+                                            </div>
+                                        </div>  
+                                    </div> -->
+                                    <!-- <div class="row d-flex justify-content-center">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">International Passport</div>
+                                            <div class="col-md-1">:</div>
+                                            <div class="col-md-4">
+                                                <label #txtPassportNo>{{passportNo}}</label>
+                                            </div>
+                                        </div>  
+                                    </div> -->
+                                    <!-- <div class="row d-flex justify-content-center">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">Applicant Name</div>
+                                            <div class="col-md-1">:</div>
+                                            <div class="col-md-5">
+                                                <label #txtName>{{applicantName}}</label>
+                                            </div>
+                                        </div>  
+                                    </div>  -->
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="form-group row">
+                                            <div class="col-md-2">                                            
+                                                <button type="submit" class="btn btn-primary" (click)="onFaceClick()" >Upload Photo</button> 
+    
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </form>
+                            </div>
+                            <form>
+                                
+                              </form>
+                              
+                            <!-- <div *ngIf="divFaceCapturing">
+                                <div class="row d-flex justify-content-center ">
+                                    <div class="row">
+                                        <div class="form-group row">
+                                            <div class="col-md-12"> 
+                                                <video #video  autoplay width="320px" height="240px"></video>
+                                            </div>
+                                            <div class="col-md-6" >                                            
+                                                <canvas #canvas style="width: 100%;height: 210px;display: none;"></canvas>                                                
+                                            </div>
+                                        </div>                                       
+                                    </div>   
+                                                                    
+                                </div>                                
+                                <div *ngIf="divSuccess">
+                                    <div class="row d-flex justify-content-center ">
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <p class="text-success">Face Captured Success.</p>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="divError">
+                                    <div class="row d-flex justify-content-center ">
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <p class="text-success">{{error}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-center ">
+                                    <div class="row">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-primary" (click)="savePhoto()">save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                               
+                            </div> -->
+                            <div *ngIf="divFaceCapturing">
+                                <div class="row d-flex justify-content-center ">
+                                    <div class="row">
+                                        <form [formGroup] = "uploadPhotoForm" (ngSubmit)="onPhotoSubmit()">  
+                                            <div class="form-group row">
+                                                <div class="col-md-4">Upload Photo </div>
+                                                <!-- <label for="file">Upload Photo</label> -->
+                                                <div class="col-md-6">
+                                                    <input 
+                                                    formControlName="profile"
+                                                    id="profile" 
+                                                    type="file" 
+                                                    class="form-control"
+                                                    (change)="onFileChange($event)" [ngClass]="{ 'is-invalid': isSubmitted && f1.profile.errors }">
+                                                    <div *ngIf="isSubmitted && f1.profile.errors" class="invalid-feedback">
+                                                        <div *ngIf="f1.profile.errors.required">File is required.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                                </div>
+                                                
+                                            </div>
+                                            <img [src]="imageSrc" *ngIf="imageSrc" style="height: 189px; width:132px">
+                                           
+                                      </form>
+                                   </div>
+                                </div>
+                                <div *ngIf="divSuccess">
+                                    <div class="row d-flex justify-content-center ">
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <p class="text-success">Face Captured Success.</p>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="divError">
+                                    <div class="row d-flex justify-content-center ">
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <p class="text-danger">{{error}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+
+                            </div>
+
+                            <div class="row" >                                
+                               
+
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">BIOMETRIC ENTROLLMENT & VERIFICATION</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="smartwizard">
+                                                <ul>
+                                                    <li><a href="#step-1">Step 1<br /><small>APPLICANT INFOIRMATION</small></a></li>
+                                                    <li><a href="#step-2">Step 2<br /><small>FACE CAPTURING</small></a></li>
+                                                    <li><a href="#step-3">Step 3<br /><small>10 FINGER PRINTS</small></a></li>
+                                                    <li><a href="#step-4">Step 4<br /><small>DOCUMENT ATTACHMENT</small></a></li>
+                                                </ul>
+                                                <div class="mt-4">
+                                                    
+                                                    <div id="step-1">
+                                                        <!-- <div class="row">  
+                                                            
+                                                            <div class="col-md-6">
+                                                                Country Code
+                                                                <input type="text" class="form-control" disabled #txtCountryCode>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                Year
+                                                                <input type="text" class="form-control" disabled  #txtYear>
+                                                            </div>                                                            
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                           
+                                                            <div class="col-md-6">
+                                                                Month
+                                                                <input type="text" class="form-control " placeholder="Month" disabled #txtMonth>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                IOA Code
+                                                                <input type="text" class="form-control " placeholder="IOA Code" disabled #txtIOACode>
+                                                            </div>
+                                                            
+                                                        </div>
+
+                                                        <div class="row mt-3">
+                                                            
+                                                            <div class="col-md-6">
+                                                                Running Number
+                                                                <input type="text" class="form-control " placeholder="Month" disabled #txtRunningNo>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                National Identity Card Number
+                                                                <input type="text" class="form-control " placeholder="IOA Code" disabled #txtNRICNo>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mt-3">
+                                                            
+                                                            <div class="col-md-6">
+                                                                International Passport
+                                                                <input type="text" class="form-control " placeholder="Month" disabled #txtPassportNo>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                Applicant Name
+                                                                <input type="text" class="form-control " placeholder="IOA Code" disabled #txtName>
+                                                            </div>
+                                                        </div>  -->
+                                                    </div>
+                                                    
+                                                    
+                                                    <div id="step-2">
+                                                        <!-- <div class="row">
+                                                            <div class="col-md-6"> 
+                                                                <video #video  autoplay width="320px" height="240px"></video>
+                                                            </div>
+                                                            <div class="col-md-6" >
+                                                                <canvas #canvas style="width: 100%;height: 210px;"></canvas>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-6" align="center" >
+                                                                <button type="button" class="btn btn-primary" (click)="capture()">Take Picture</button>
+                                                            </div>
+                                                            <div class="col-md-6" align="center" >
+                                                                <button type="button" class="btn btn-primary" (click)="savePhoto()">save</button>
+                                                            </div>
+                                                       
+                                                        </div>
+                                                        <div class="row  mt-3" *ngIf="divSuccess">
+                                                            <div class="col-md-12">
+                                                                <p class="text-success">Face Captured Success, Please click next</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row  mt-3" *ngIf="divError">
+                                                            <div class="col-md-12">
+                                                                <p class="text-danger">{{error}}</p>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                    
+                                                    
+                                                    
+                                                    <div id="step-3" class="">
+                                                        <div class="row">
+                                                            <div class="col-md-6" >
+                                                                 <img src="assets\images\R0.jpg" width="50px">
+                                                                 <img src="assets\images\R0.jpg" width="50px">
+                                                                 <img src="assets\images\R0.jpg" width="50px">
+                                                                 <img src="assets\images\R0.jpg" width="50px">
+                                                            </div>
+                                                            <div class="col-md-6" >
+                                                                 <img src="assets\images\L0.jpg" width="50px">
+                                                                 <img src="assets\images\L0.jpg" width="50px">
+                                                                 <img src="assets\images\L0.jpg" width="50px">
+                                                                 <img src="assets\images\L0.jpg" width="50px">
+                                                            </div>
+                                                            <div class="col-md-6" >
+                                                                <img width="50px"/>
+                                                                <img width="50px"/>
+                                                                <img width="50px"/>
+                                                                <img colspan="3" src="assets\images\R0.jpg" width="50px">
+                                                           </div>
+                                                           <div class="col-md-6" >                                                            
+                                                             <img colspan="3" src="assets\images\L0.jpg" width="50px">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-6" align="center" ><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Right Fingerprints</button>&nbsp; </div>
+                                                            
+                                                            <div class="col-md-6" align="center" ><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Left Fingerprints</button> &nbsp;</div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-12" align="center">
+                                                                <button type="button" class="btn btn-primary" (click)="saveFinger()" >Save & Continue</button>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="row  mt-3" *ngIf="divFingerSuccess">
+                                                            <div class="col-md-12">
+                                                                <p class="text-success">Scanned Successfull</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row  mt-3" *ngIf="divFingerError">
+                                                            <div class="col-md-12">
+                                                                <p class="text-danger">{{error}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                    
+                                                    <div id="step-4" class="">
+                                                        <div class="row">
+                                                           
+                                                            <div class="col-md-10">
+                                                                <div class="control-group" id="fields">
+                                                                  <label class="control-label" for="field1">
+                                                                  Upload All Atachments
+                                                                  </label>
+                                                                  <div class="controls">
+                                  
+                                                                     <!-- <div class="entry input-group col-xs-3">
+                                                                         <input class="btn btn-primary" name="fields[]" type="file">
+                                                                          <span class="input-group-btn">
+                                                                             <button class="btn btn-success btn-add" type="button">    
+                                                                                 <span class="glyphicon glyphicon-plus">+</span>
+                                                                             </button>
+                                                                          </span>
+                                                                      </div> -->
+                                                                      <form [formGroup]="myForm"  (ngsubmit)="submit()">
+  
+                                                                        <!-- <div class="form-group">
+                                                                            <label for="name">Name</label>
+                                                                            <input 
+                                                                                formControlName="name"
+                                                                                id="name" 
+                                                                                type="text" 
+                                                                                class="form-control">
+                                                                            <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+                                                                                <div *ngIf="f.name.errors.required">Name is required.</div>
+                                                                                <div *ngIf="f.name.errors.minlength">Name should be 3 character.</div>
+                                                                            </div>
+                                                                        </div> -->
+                                                                          
+                                                                        <div class="form-group">
+                                                                            <label for="file">International Passport</label>
+                                                                            <input 
+                                                                                formControlName="file"
+                                                                                id="file" 
+                                                                                type="file" 
+                                                                                class="form-control"
+                                                                                (change)="onFileChange($event)">
+                                                                            <!-- <div *ngIf="f1.file.touched && f1.file.invalid" class="alert alert-danger">
+                                                                                <div *ngIf="f1.file.errors.required">File is required.</div>
+                                                                            </div> -->
+                                                                        </div>
+                                                                              
+                                                                        <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
+                                                                    </form>
+                                  
+                                                                    </div>
+                                 
+                                                                </div>
+                                                                <!-- <span>Thanks For submitting your details with My E-Visa. we will send you a confirmation email. We will review your details and revert back.</span> -->
+                                                           </div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-10">
+                                                                <div class="control-group">
+                                                                    <div class="controls">
+                                                                        <form [formGroup]="myForm1" >
+                                                                            <div class="form-group">
+                                                                                <label for="file">National Registration Identity Card</label>
+                                                                                <input 
+                                                                                    formControlName="file1"
+                                                                                    id="file1" 
+                                                                                    type="file" 
+                                                                                    class="form-control"
+                                                                                    (change)="onFileChange($event)">
+                                                                                <!-- <div *ngIf="f1.file.touched && f1.file.invalid" class="alert alert-danger">
+                                                                                    <div *ngIf="f1.file.errors.required">File is required.</div>
+                                                                                </div> -->
+                                                                            </div>
+
+                                                                        </form>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-10">
+                                                                <div class="control-group">
+                                                                    <div class="controls">
+                                                                        <form [formGroup]="myForm2" >
+                                                                            <div class="form-group">
+                                                                                <label for="file">Flight Detail(Confirmed return ticket)</label>
+                                                                                <input 
+                                                                                    formControlName="file2"
+                                                                                    id="file2" 
+                                                                                    type="file" 
+                                                                                    class="form-control"
+                                                                                    (change)="onFileChange($event)">
+                                                                                <!-- <div *ngIf="f1.file.touched && f1.file.invalid" class="alert alert-danger">
+                                                                                    <div *ngIf="f1.file.errors.required">File is required.</div>
+                                                                                </div> -->
+                                                                            </div>
+
+                                                                        </form>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-10">
+                                                                <div class="control-group">
+                                                                    <div class="controls">
+                                                                        <form [formGroup]="myForm3" >
+                                                                            <div class="form-group">
+                                                                                <label for="file">Sufficient Fund (Debit Card or Credit Card)</label>
+                                                                                <input 
+                                                                                    formControlName="file3"
+                                                                                    id="file3" 
+                                                                                    type="file" 
+                                                                                    class="form-control"
+                                                                                    (change)="onFileChange($event)">
+                                                                                <!-- <div *ngIf="f1.file.touched && f1.file.invalid" class="alert alert-danger">
+                                                                                    <div *ngIf="f1.file.errors.required">File is required.</div>
+                                                                                </div> -->
+                                                                            </div>
+
+                                                                        </form>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-10">
+                                                                <div class="control-group">
+                                                                    <div class="controls">
+                                                                        <form [formGroup]="myForm4" >
+                                                                            <div class="form-group">
+                                                                                <label for="file">Certificate of Vaccination Yellow Fever (YF-VAX)</label>
+                                                                                <input 
+                                                                                    formControlName="file4"
+                                                                                    id="file4" 
+                                                                                    type="file" 
+                                                                                    class="form-control"
+                                                                                    (change)="onFileChange($event)">
+                                                                                <!-- <div *ngIf="f1.file.touched && f1.file.invalid" class="alert alert-danger">
+                                                                                    <div *ngIf="f1.file.errors.required">File is required.</div>
+                                                                                </div> -->
+                                                                            </div>
+
+                                                                        </form>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-10">
+                                                                <div class="control-group">
+                                                                    <div class="controls">
+                                                                        <form [formGroup]="myForm5" >
+                                                                            <div class="form-group">
+                                                                                <label for="file">Covid-19 Free / Asymptomatic Certificate (For Traveler)</label>
+                                                                                <input 
+                                                                                    formControlName="file5"
+                                                                                    id="file5" 
+                                                                                    type="file" 
+                                                                                    class="form-control"
+                                                                                    (change)="onFileChange($event)">
+                                                                                
+                                                                            </div>
+
+                                                                        </form>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-10">
+                                                                <div class="control-group">
+                                                                    <div class="controls">
+                                                                        <form [formGroup]="myForm6" >
+                                                                            <div class="form-group">
+                                                                                <label for="file">Sponsor Letters – If required</label>
+                                                                                <input 
+                                                                                    formControlName="file6"
+                                                                                    id="file6" 
+                                                                                    type="file" 
+                                                                                    class="form-control"
+                                                                                    (change)="onFileChange($event)">
+                                                                               
+                                                                            </div>
+
+                                                                        </form>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+                <!-- <div class="card">
+                    
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

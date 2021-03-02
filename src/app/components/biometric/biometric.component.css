@@ -1,0 +1,54 @@
+/* @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'); */
+@import url('https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152092/smartwizard/smart_wizard.min.css');
+@import url('https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152091/smartwizard/smart_wizard_theme_arrows.min.css');
+body {
+    background-color: #eee
+    }
+    
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0rem rgba(0, 123, 255, .25)
+}
+    
+.btn-secondary:focus {
+  box-shadow: 0 0 0 0rem rgba(108, 117, 125, .5)
+}
+    
+.close:focus {
+  box-shadow: 0 0 0 0rem rgba(108, 117, 125, .5)
+}
+    
+.mt-200 {
+  margin-top: 200px
+}
+    
+.entry:not(:first-of-type)
+  {
+   margin-top: 10px;
+  }
+    
+.glyphicon
+  {
+   font-size: 12px;
+  }
+
+.square {
+  height: 60px;
+  width: 40px;
+}
+
+.vid {
+  width: 320px;
+  height: 480px;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}

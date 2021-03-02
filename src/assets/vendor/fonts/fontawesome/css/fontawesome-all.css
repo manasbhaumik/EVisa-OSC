@@ -1108,8 +1108,8 @@ readers do not read off random characters that represent icons */
 .fa-filter:before {
   content: "\f0b0"; }
 
-.fa-fingerprint:before{
-  content: "\f577"; } 
+.fa-finger-print:before{
+  content: "\f5c2"; } 
 
 .fa-fire:before {
   content: "\f06d"; }
