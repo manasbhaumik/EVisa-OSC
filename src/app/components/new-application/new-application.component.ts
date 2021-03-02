@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators,FormBuilder} from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { Router,ActivatedRoute } from  '@angular/router';
+import { DataService } from 'src/app/Services/data.service';
+import { MatDialog, MatDialogRef,MatDialogConfig ,MAT_DIALOG_DATA} from  '@angular/material/dialog';
+import {ModalPopupComponent} from 'src/app/Modal/modal-popup/modal-popup.component';
 
 @Component({
   selector: 'app-new-application',
