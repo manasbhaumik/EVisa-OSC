@@ -10,8 +10,10 @@ import { forkJoin, Observable, empty, fromEvent, BehaviorSubject } from 'rxjs';
 import { DataService } from 'src/app/Services/data.service';
 import {ModalPopupComponent} from 'src/app/Modal/modal-popup/modal-popup.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { data } from 'jquery';
 
 declare var smartWizard :any;
+declare var Webcam : any;
 
 @Component({
   selector: 'app-biometric',
@@ -20,7 +22,7 @@ declare var smartWizard :any;
   providers: [DatePipe]
 })
 export class BiometricComponent implements OnInit {
-  @ViewChild('txtCountryCode', { static: false }) txtCountryCode: ElementRef;
+  @ViewChild('txtCountryCode') txtCountryCode: ElementRef;
   @ViewChild('txtYear', { static: false }) txtYear: ElementRef; 
   @ViewChild('txtMonth', { static: false }) txtMonth: ElementRef;
   @ViewChild('txtIOACode', { static: false }) txtIOACode: ElementRef;
@@ -34,14 +36,18 @@ export class BiometricComponent implements OnInit {
   @ViewChild('canvas', { static: false }) canvas: ElementRef;
   @ViewChild('canvas1', { static: false }) canvas1: ElementRef;
 
+  @ViewChild('Camera', { static: false }) CameraElement: ElementRef;
+
+  @ViewChild('displayScanDoc') displayScanDoc: ElementRef;
+
   videoWidth = 0;
   videoHeight = 0;
   localstream : any;
   constraints = {
     video: {
       facingMode: "environment",
-      width: { ideal: 4096 },
-      height: { ideal: 2160 }
+      width: { ideal: 4096 },//132
+      height: { ideal: 2160 }//189
     }
   };
 
@@ -64,10 +70,15 @@ export class BiometricComponent implements OnInit {
   picture : any;
   divApplicationInfo : boolean = true;
   divFaceCapturing : boolean = true;
+  divFingerCapturing : boolean = true;
+  divDocuments : boolean = true;
   divSuccess : boolean =true;
   divError : boolean =true;
+  divFaceCaptureError : boolean =true;
   divFingerSuccess : boolean =true;
   divFingerError : boolean =true;
+  divDocumentSuccess : boolean = true;
+  divDocumentError : boolean = true;
   faceData : any;
   imageurl : any;
   docList : any;
@@ -76,9 +87,20 @@ export class BiometricComponent implements OnInit {
   currentFile?: File;
   progress = 0;
   message = '';
+  FaceCaptureSuccessMessage = '';
+  FaceCaptureErrorMessage = '';
+  FingerSuccessMessage ='';
+  FingerErrorMessage ='';
+  DocumentSuccessMessage ='';
+  DocumentErrorMessage ='';
 
   fileInfos?: Observable<any>;
   imageSrc: string;
+
+  saveSuccess ='N';
+  capturePhotoSuccess = 'N';
+
+  displayScanDocuments : any;
   
 
   constructor(
@@ -99,7 +121,7 @@ export class BiometricComponent implements OnInit {
     visaRefNo:['',Validators.required]
   });
 
-  get f1() { return this.uploadPhotoForm.controls; }
+  //get f1() { return this.uploadPhotoForm.controls; }
 
   // uploadForm = this.fb.group({
   //   profile: ['']
@@ -115,61 +137,63 @@ export class BiometricComponent implements OnInit {
     fileSource :['',Validators.required]
   });
 
-  myForm = new FormGroup({
+  get f1(){  return this.UploadPassportForm.controls; }
+
+  UploadPassportForm = new FormGroup({
     //name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    file: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
+    uploadPassport: new FormControl('', [Validators.required]),
+    //fileSource: new FormControl('', [Validators.required])
   });
 
-  // get f1(){  return this.myForm.controls; }
+  get f2(){  return this.UploadNRICForm.controls; }
 
-  myForm1 = new FormGroup({
+  UploadNRICForm = new FormGroup({
     //name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    file1: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
+    UploadNRIC: new FormControl('', [Validators.required]),
+    //fileSource: new FormControl('', [Validators.required])
   });
 
-  // get f2(){  return this.myForm1.controls; }
+  get f3(){  return this.UploadFlightForm.controls; }
 
-  myForm2 = new FormGroup({
+  UploadFlightForm = new FormGroup({
     //name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    file2: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
+    UploadFlight: new FormControl('', [Validators.required]),
+    //fileSource: new FormControl('', [Validators.required])
   });
 
-  // get f3(){  return this.myForm2.controls; }
+  get f4(){  return this.UploadFundForm.controls; }
 
-  myForm3 = new FormGroup({
+  UploadFundForm = new FormGroup({
     //name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    file3: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
+    UploadFund: new FormControl('', [Validators.required]),
+    //fileSource: new FormControl('', [Validators.required])
   });
 
-  // get f4(){  return this.myForm3.controls; }
+  get f5(){  return this.UploadYellowFeverForm.controls; }
 
-  myForm4 = new FormGroup({
+  UploadYellowFeverForm = new FormGroup({
     //name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    file4: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
+    UploadYellowFever: new FormControl('', [Validators.required]),
+    //fileSource: new FormControl('', [Validators.required])
   });
 
-  // get f5(){  return this.myForm4.controls; }
+  get f6(){  return this.UploadCovid19Form.controls; }
 
-  myForm5 = new FormGroup({
+  UploadCovid19Form = new FormGroup({
     //name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    file5: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
+    UploadCovid19: new FormControl('', [Validators.required]),
+    //fileSource: new FormControl('', [Validators.required])
   });
 
-  // get f6(){  return this.myForm5.controls; }
+  get f7(){  return this.UploadSponsorForm.controls; }
 
-  myForm6 = new FormGroup({
+  UploadSponsorForm = new FormGroup({
     //name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    file6: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
+    UploadSponsor: new FormControl(''),
+    //fileSource: new FormControl('', [Validators.required])
   });
 
-  // get f7(){  return this.myForm6.controls; }
+  
 
 
   // onFileChange(event) {
@@ -197,26 +221,32 @@ export class BiometricComponent implements OnInit {
     // this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
     //     //this.router.navigate([currentUrl]);alert(currentUrl);
     // });
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate([currentUrl]);
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    // this.router.onSameUrlNavigation = 'reload';
+    // this.router.navigate([currentUrl]);
 
     this.divApplicationInfo = false;
     this.divFaceCapturing = false;
+    this.divFingerCapturing = false;
+    this.divDocuments = false;
     this.divSuccess = false;
     this.divError =false;
+    this.divFaceCaptureError =false;
     this.divFingerSuccess =false;
     this.divFingerError = false;
+    this.divDocumentSuccess = false;
+    this.divDocumentError = false;
 
     this.activeRouter.params.subscribe(params => {
       var applicationId = params['applicationId'];
       this.visaRefNo=applicationId; 
-      if(this.visaRefNo !==undefined){
+      //alert(this.visaRefNo);
+      if(this.visaRefNo !==undefined){//alert("1");
         this.visaRefNo=applicationId; 
         this.applicantInfoForm.controls['visaRefNo'].setValue(this.visaRefNo);
       }
       else{
-        //alert("1");
+        //alert("2");
         this.visaRefNo=""; 
         this.applicantInfoForm.controls['visaRefNo'].setValue("");
       }
@@ -254,11 +284,14 @@ export class BiometricComponent implements OnInit {
   }
 
   getApplicantInfo(){
-    this.divApplicationInfo = true;
+    //this.divApplicationInfo = true;
     this.isSubmitted = true;
     if(this.applicantInfoForm.invalid){
     this.divApplicationInfo =false;
       return;
+    }
+    else{
+     // this.divApplicationInfo = true;
     }
 
     var refNo =  this.applicantInfoForm.controls['visaRefNo'].value;
@@ -266,76 +299,103 @@ export class BiometricComponent implements OnInit {
       this.applicantInfoList=res;
       if(res == null){
         this.applicantInfoList = null;
-        var dialogRef =this.dialog.open(ModalPopupComponent,{ data: {
-          message : "Reference number does not exists",
-          title : "Alert!",
-          buttonText : "Cancel"
-        }});
-        dialogRef.afterClosed().subscribe(result => {
-          //console.log('The dialog was closed',result);
-          this.returnUrl = result;
-          result ? this.router.navigate(['/home']): this.router.navigate(['/biometric',{applicationId : this.visaRefNo}]);
-        });
+        this.error = "Reference number does not exists";
+        this.divError = true;
+        this.divApplicationInfo = false;
+        // var dialogRef =this.dialog.open(ModalPopupComponent,{ data: {
+        //   message : "Reference number does not exists",
+        //   title : "Alert!",
+        //   buttonText : "Cancel"
+        // }});
+        // dialogRef.afterClosed().subscribe(result => {
+        //   //console.log('The dialog was closed',result);
+        //   this.returnUrl = result;
+        //   result ? this.router.navigate(['/home']): this.router.navigate(['/biometric',{applicationId : this.visaRefNo}]);
+        // });
       }
       else{
         if(!this.applicantInfoList?.length){
-          var dialogRef =this.dialog.open(ModalPopupComponent,{ data: {
-            message : "Reference number does not exists",
-            title : "Alert!",
-            buttonText : "Cancel"
-          }});
-          dialogRef.afterClosed().subscribe(result => {
-            //console.log('The dialog was closed',result);
-            this.returnUrl = result;
-            result ? this.router.navigate(['/home']): this.router.navigate(['/biometric',{applicationId:this.visaRefNo}]);
-          });
+          this.error =  "Reference number does not exists";
+          this.divError = true;
+          this.divApplicationInfo = false;
+          // var dialogRef =this.dialog.open(ModalPopupComponent,{ data: {
+          //   message : "Reference number does not exists",
+          //   title : "Alert!",
+          //   buttonText : "Cancel"
+          // }});
+          // dialogRef.afterClosed().subscribe(result => {
+          //   //console.log('The dialog was closed',result);
+          //   this.returnUrl = result;
+          //   result ? this.router.navigate(['/home']): this.router.navigate(['/biometric',{applicationId:this.visaRefNo}]);
+          // });
         }
         else{
           //this.applicantInfoList=res;
           //console.log(this.applicantInfoList);
-          this.renderer.setProperty(this.txtCountryCode.nativeElement, 'value', this.applicantInfoList[0].CountryCode);
+          this.divApplicationInfo = true;
+          this.divError = false;
+         //this.renderer.setProperty(this.txtCountryCode.nativeElement, 'value', this.applicantInfoList[0].CountryCode);
           this.countryCode =this.applicantInfoList[0].CountryCode;
-          this.renderer.setProperty(this.txtYear.nativeElement, 'value', this.applicantInfoList[0].Year);
+         // this.renderer.setProperty(this.txtYear.nativeElement, 'value', this.applicantInfoList[0].Year);
           this.year = this.applicantInfoList[0].Year;         
-          this.renderer.setProperty(this.txtMonth.nativeElement, 'value', this.applicantInfoList[0].Month);
+          //this.renderer.setProperty(this.txtMonth.nativeElement, 'value', this.applicantInfoList[0].Month);
           this.month = this.applicantInfoList[0].Month;
-          this.renderer.setProperty(this.txtIOACode.nativeElement, 'value', this.applicantInfoList[0].IOACode);
+         // this.renderer.setProperty(this.txtIOACode.nativeElement, 'value', this.applicantInfoList[0].IOACode);
           this.ioaCode = this.applicantInfoList[0].IOACode;
-          this.renderer.setProperty(this.txtRunningNo.nativeElement, 'value', this.applicantInfoList[0].RNo);
+          //this.renderer.setProperty(this.txtRunningNo.nativeElement, 'value', this.applicantInfoList[0].RNo);
           this.rNo = this.applicantInfoList[0].RNo;
-          this.renderer.setProperty(this.txtNRICNo.nativeElement, 'value', this.applicantInfoList[0].IDNumber);
+          //this.renderer.setProperty(this.txtNRICNo.nativeElement, 'value', this.applicantInfoList[0].IDNumber);
           this.nricNo = this.applicantInfoList[0].IDNumber;
-          this.renderer.setProperty(this.txtPassportNo.nativeElement, 'value', this.applicantInfoList[0].PassportNo);
+          //this.renderer.setProperty(this.txtPassportNo.nativeElement, 'value', this.applicantInfoList[0].PassportNo);
           this.passportNo = this.applicantInfoList[0].PassportNo;
-          this.renderer.setProperty(this.txtName.nativeElement, 'value', this.applicantInfoList[0].FullName);
+          //this.renderer.setProperty(this.txtName.nativeElement, 'value', this.applicantInfoList[0].FullName);
           this.applicantName = this.applicantInfoList[0].FullName;
         }
       }
     },
     error =>{
-      var dialogRef =this.dialog.open(ModalPopupComponent,{ data: {
-        message : "Record Not found",
-        title : "Alert!",
-        buttonText : "Cancel"
-      }});
-      dialogRef.afterClosed().subscribe(result => {
-        //console.log('The dialog was closed',result);
-        this.returnUrl = result;
-        result ? this.router.navigate(['/agency-details']): this.router.navigate(['/biometric',{applicationId:this.visaRefNo}]);
-      });
+      this.error = "Record Not found";
+      this.divError = true;
+      this.divApplicationInfo = false;
+      // var dialogRef =this.dialog.open(ModalPopupComponent,{ data: {
+      //   message : "Record Not found",
+      //   title : "Alert!",
+      //   buttonText : "Cancel"
+      // }});
+      // dialogRef.afterClosed().subscribe(result => {
+      //   //console.log('The dialog was closed',result);
+      //   this.returnUrl = result;
+      //   result ? this.router.navigate(['/agency-details']): this.router.navigate(['/biometric',{applicationId:this.visaRefNo}]);
+      // });
     });
 
   }
 
   onFaceClick(){
     this.divApplicationInfo =false;
-    this.divFaceCapturing =true;    
-   // this.startCamera();
+    this.divFaceCapturing =true;  
+    this.divFingerCapturing = false;  
+    this.startCamera();
+   // this.webCamSetting();
+   //this.attachVideo(this);
+  }
+
+  webCamSetting(){
+   
+    Webcam.set({
+      width: 140,// 132,
+      height: 190,// 189,
+      image_format: 'jpeg',
+      jpeg_quality: 100,
+      alert:'a'
+    });
+    var c = this.CameraElement.nativeElement;
+    Webcam.attach(c);
   }
 
   startCamera() {
     if (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
-        navigator.mediaDevices.getUserMedia(this.constraints).then(this.attachVideo.bind(this)).catch(this.handleError);
+        navigator.mediaDevices.getUserMedia({ video: true }).then(this.attachVideo.bind(this)).catch(this.handleError);
     } else {
         alert('Sorry, camera not available.');
     }
@@ -346,28 +406,37 @@ export class BiometricComponent implements OnInit {
     this.localstream = stream;
     this.renderer.setProperty(this.videoElement.nativeElement, 'srcObject', stream);
     this.renderer.listen(this.videoElement.nativeElement, 'play', (event) => {
-        this.videoHeight = this.videoElement.nativeElement.videoHeight;
-        this.videoWidth = this.videoElement.nativeElement.videoWidth;
+        this.videoHeight = 190;// 189;//this.videoElement.nativeElement.videoHeight;
+        this.videoWidth = 140;// 132;//this.videoElement.nativeElement.videoWidth;
+        //alert("Width :"+this.videoWidth +" "+"Height: "+this.videoHeight);
     });
-    // this.renderer.setProperty(this.videoElement1.nativeElement, 'srcObject', stream);
-    // this.renderer.listen(this.videoElement1.nativeElement, 'play', (event) => {
-    //     this.videoHeight = this.videoElement1.nativeElement.videoHeight;
-    //     this.videoWidth = this.videoElement1.nativeElement.videoWidth;
+    // Webcam.set({
+    //   width: 132,
+    //   height: 189,
+    //   image_format: 'jpeg',
+    //   jpeg_quality: 100,
+    //   alert:'a'
     // });
+    // var c = this.CameraElement.nativeElement;
+    // Webcam.attach(c);
+   
   }
 
   handleError(error) {
     console.log('Error: ', error);
+    alert(error);
   }
 
   capture() {
-    this.renderer.setProperty(this.canvas.nativeElement, 'width', this.videoWidth);
-    this.renderer.setProperty(this.canvas.nativeElement, 'height', this.videoHeight);
-    this.canvas.nativeElement.getContext('2d').drawImage(this.videoElement1.nativeElement, 0, 0);
+  // this.renderer.setProperty(this.canvas.nativeElement, 'width', this.videoElement.nativeElement.videoWidth);
+  // this.renderer.setProperty(this.canvas.nativeElement, 'height', this.videoElement.nativeElement.videoHeight);
+   //  this.canvas.nativeElement.getContext('2d').drawImage(this.videoElement.nativeElement, 0, 0,140,190);
+    this.canvas.nativeElement.getContext('2d').drawImage(this.videoElement.nativeElement, 180, 80, 264, 378, 0, 20, 132, 189);
+    // this.canvas.nativeElement.getContext('2d').drawImage(this.videoElement.nativeElement, 90, 40, 140, 190, 0, 0, 140, 190);
     //this.canvas.nativeElement.getContext('2d').fillRect(this.videoElement.nativeElement, 25, 25, 100, 100);
-    this.picture = this.canvas.nativeElement.toDataURL("image/png");
+    this.picture = this.canvas.nativeElement.toDataURL("image/Jpeg");
     
-    this.videoElement1.nativeElement.pause();
+    this.videoElement.nativeElement.pause();
     if (this.localstream.stop) {
       this.localstream.stop();
     }
@@ -383,17 +452,73 @@ export class BiometricComponent implements OnInit {
     //console.log(blob);
     this.capture();
     this.localstream.getVideoTracks()[0].stop();
-    var base64 = this.picture.replace(/^data:image\/(png|jpg);base64,/, "");
+    //var base64 = this.picture.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
     //console.log(base64);
     //console.log(this.picture);
-    // this.dataService.saveDocuments(this.visaRefNo,'Face Capture','png',base64).subscribe((data:any)=>{     
-    //   this.divSuccess = true;
-    // },
-    // error=>{
-    //   this.error=error.error.Message;     
-    //   this.divError = true;
-    // });
+    if(this.visaRefNo == ""){
+      this.visaRefNo = this.applicantInfoForm.controls['visaRefNo'].value;
+    }
+    this.saveSuccess = "N";
+    this.capturePhotoSuccess = "Y";
+    this.FaceCaptureSuccessMessage = "Photo Captured Success,Please click Save & Continue";
     this.divSuccess = true;
+    this.divFaceCaptureError = false;
+    // this.dataService.saveDocuments(this.visaRefNo,'Face Capture','png',base64).subscribe((data:any)=>{
+    //   this.divSuccess = true;
+    //   this.divApplicationInfo = false;
+    //   this.saveSuccess = "Y";
+    //   //this.divFaceCapturing = false;
+    //   // this.divFingerCapturing = true;
+    // },
+    // error =>{
+    //   this.error=error.error.Message;
+    //   this.divError = true;
+    //   this.saveSuccess = "N";
+    // });
+    
+     //this.divSuccess = true;
+     //this.divFaceCapturing = false;
+    //  this.divFingerCapturing = true;
+  }
+
+  saveFingerCapture(){
+    if(this.capturePhotoSuccess == "Y"){
+      var base64 = this.picture.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+      this.dataService.saveDocuments(this.visaRefNo,'Face Capture','png',base64).subscribe((data:any)=>{
+        this.FaceCaptureSuccessMessage = "Face Captured Success";
+        this.divSuccess = true;
+        this.divApplicationInfo = false;
+        this.saveSuccess = "Y";
+        if(this.saveSuccess == "Y"){
+          this.divFaceCapturing = false;
+          this.divFingerCapturing = true;
+        }
+      //this.divFaceCapturing = false;
+      // this.divFingerCapturing = true;
+      },
+      error =>{
+        this.FaceCaptureErrorMessage = error.error.Message;
+        this.divFaceCaptureError = true;
+        this.saveSuccess = "N";
+        if(this.saveSuccess == "N" ){
+          return;
+        }
+      });
+
+      // if(this.saveSuccess == "Y"){
+      //   this.divFaceCapturing = false;
+      //   this.divFingerCapturing = true;
+      // }
+      // else if(this.saveSuccess == "N" ){
+      //   return;
+      // }
+    }
+    else{
+      this.FaceCaptureErrorMessage = "Please click Take Photo to capture ";
+      this.divFaceCaptureError = true;
+    }
+    
+   
   }
 
   saveFinger(){
@@ -411,26 +536,59 @@ export class BiometricComponent implements OnInit {
     //   this.divFingerSuccess = true;
     // },
     // error=>{
-    //   this.error=error.error.Message;
+    //   this.FingerErrorMessage = error.error.Message;
       
     //   this.divFingerError = true;
     // });
+    this.FingerSuccessMessage = "Fingers Captured Successfully";
     this.divFingerSuccess = true;
+    this.divFingerCapturing = false;
+    this.divDocuments = true;
+  }
+
+  saveDocuments(){//alert("1");
+    this.isSubmitted = true;
+    if(this.UploadPassportForm.invalid){
+      //this.divApplicationInfo =false;
+      return;
+    }
+    else if(this.UploadNRICForm.invalid){
+      return;
+    }
+    else if(this.UploadFlightForm.invalid){
+      return;
+    }
+    else if(this.UploadFundForm.invalid){
+      return;
+    }
+    else if(this.UploadYellowFeverForm.invalid){
+      return;
+    }
+    else if(this.UploadCovid19Form.invalid){
+      return;
+    }
+
+    //alert("2");
+    // const formData = new FormData();
+    // formData.append('file', this.myForm.get('fileSource').value);
+    //this.DocumentErrorMessage =  " error";
+    //this.divDocumentError = true;
+    return;
   }
 
   submit(){
-    const formData = new FormData();
-    formData.append('file', this.myForm.get('fileSource').value);
+    // const formData = new FormData();
+    // formData.append('file', this.myForm.get('fileSource').value);
 
-    this.dataService.saveDocuments(this.visaRefNo,'Passport','png',formData).subscribe((data:any)=>{
+    // this.dataService.saveDocuments(this.visaRefNo,'Passport','png',formData).subscribe((data:any)=>{
      
-      //this.divFingerSuccess = true;
-    },
-    error=>{
-      this.error=error.error.Message;
+    //   //this.divFingerSuccess = true;
+    // },
+    // error=>{
+    //   this.error=error.error.Message;
       
-      //this.divFingerError = true;
-    });
+    //   //this.divFingerError = true;
+    // });
    
     
   }
@@ -492,7 +650,7 @@ export class BiometricComponent implements OnInit {
     },
     error =>{
       this.error=error.error.Message;
-      this.divError = true;
+      this.divFaceCaptureError = true;
     });
     
     
@@ -524,6 +682,125 @@ export class BiometricComponent implements OnInit {
   //   this.divSuccess = true;
     
   // }
+
+  // webCamSetting(){
+  //   Webcam.set({
+  //     width: 220,
+  //     height: 190,
+  //     image_format: 'jpeg',
+  //     jpeg_quality: 100
+  //   });
+  //   Webcam.attach(this.CameraElement.nativeElement);
+  // }
+
+  takeSnapShot(){
+    Webcam.snap(function (data_uri) {
+      //this.downloadImage('ashiq',data_uri);
+      //this.ImageSave();
+     // alert(data_uri);
+      var a = document.createElement('a');
+      a.setAttribute('download', 'ashiq' + '.png');
+      a.setAttribute('href', data_uri);
+      a.click();
+      
+      // this.dataService.saveDocuments(this.visaRefNo,'Face Capture','png',base64).subscribe((data:any)=>{
+      //   this.divSuccess = true;
+      // },
+      // error =>{
+      //   this.error=error.error.Message;
+      //   this.divError = true;
+      // });
+   });
+  
+  }
+
+  ImageSave(){
+
+  }
+
+  downloadImage(name, datauri){
+    var a = document.createElement('a');
+    a.setAttribute('download', name + '.png');
+    a.setAttribute('href', datauri);
+    a.click();
+  }
+
+  ScanPasport(){
+    const childElements = this.displayScanDoc.nativeElement.childNodes;
+    for (let child of childElements) {
+      this.renderer.removeChild(this.displayScanDoc.nativeElement, child);
+    }
+    const img = this.renderer.createElement('img');
+    //var img = document.createElement('img');
+    img.src = 'assets/images/Passport.jpg';//'https://media.geeksforgeeks.org/wp-content/uploads/20190529122828/bs21.png';//'assetsimages/L0.jpg';
+    //document.getElementById(this.displayScanDoc.nativeElement).appendChild(img);
+    this.renderer.removeChild(this.displayScanDoc.nativeElement, img);
+    this.renderer.appendChild(this.displayScanDoc.nativeElement, img);
+    //this.displayScanDocuments = img;//"<img  src='assets\images\L0.jpg' >"
+
+  }
+
+  ScanNRIC(){    
+    const childElements = this.displayScanDoc.nativeElement.childNodes;
+    for (let child of childElements) {
+      this.renderer.removeChild(this.displayScanDoc.nativeElement, child);
+    }
+    const img = this.renderer.createElement('img');    
+    img.src = 'assets/images/AdharCard_02.jpg';
+    this.renderer.appendChild(this.displayScanDoc.nativeElement, img);
+  }
+
+  ScanTicket(){    
+    const childElements = this.displayScanDoc.nativeElement.childNodes;
+    for (let child of childElements) {
+      this.renderer.removeChild(this.displayScanDoc.nativeElement, child);
+    }
+    const img = this.renderer.createElement('img');    
+    img.src = 'assets/images/Ticket.jpg';
+    //img.width ='100%';
+    this.renderer.setStyle(img, 'width', `100%`);
+    this.renderer.appendChild(this.displayScanDoc.nativeElement, img);
+  }
+
+  ScanSponsorLetter(){    
+    const childElements = this.displayScanDoc.nativeElement.childNodes;
+    for (let child of childElements) {
+      this.renderer.removeChild(this.displayScanDoc.nativeElement, child);
+    }
+    const img = this.renderer.createElement('img');    
+    img.src = 'assets/images/Sponsor Letter.jpg';
+    this.renderer.appendChild(this.displayScanDoc.nativeElement, img);
+  }
+
+  ScanSufficientFund(){    
+    const childElements = this.displayScanDoc.nativeElement.childNodes;
+    for (let child of childElements) {
+      this.renderer.removeChild(this.displayScanDoc.nativeElement, child);
+    }
+    const img = this.renderer.createElement('img');    
+    img.src = 'assets/images/DebitCard.jpg';
+    this.renderer.appendChild(this.displayScanDoc.nativeElement, img);
+  }
+
+  ScanYellowFever(){    
+    const childElements = this.displayScanDoc.nativeElement.childNodes;
+    for (let child of childElements) {
+      this.renderer.removeChild(this.displayScanDoc.nativeElement, child);
+    }
+    const img = this.renderer.createElement('img');    
+    img.src = 'assets/images/YellowFever.jpg';
+    this.renderer.appendChild(this.displayScanDoc.nativeElement, img);
+  }
+
+  ScanCovid19(){    
+    const childElements = this.displayScanDoc.nativeElement.childNodes;
+    for (let child of childElements) {
+      this.renderer.removeChild(this.displayScanDoc.nativeElement, child);
+    }
+    const img = this.renderer.createElement('img');    
+    img.src = 'assets/images/Covid19.jpg';
+    this.renderer.appendChild(this.displayScanDoc.nativeElement, img);
+  }
 
   
 

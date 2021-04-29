@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Rush List Applications</h2>
+                    <h3 class="pageheader-title">Rush List Applications</h3>
                     <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                     
                 </div>
@@ -26,7 +26,9 @@
                                     <th>Name</th>
                                     <th>Type of visa</th>
                                     <th>Processing Time</th>
-                                    <th>Date</th>
+                                    <th>Submit Date</th>
+                                    <th>Appointment Date</th>
+                                    <th>Time Remaining</th>
                                     <th>Status</th>
                                 </tr>
                               </thead>
@@ -34,7 +36,7 @@
                                 <tr *ngFor="let application of ApplicationList; let i = index">
                                     <!-- <td>{{i+1}}</td> -->
                                     <td>
-                                        <div *ngIf="application.Status == 'Biometric Submitted'; else showRefNo">
+                                        <div *ngIf="application.Status == 'Biometric Submitted' || application.Status == 'Approved'; else showRefNo">
                                             {{application.MyEVisaRefNo}}
                                         </div>
                                         <ng-template #showRefNo>
@@ -47,6 +49,37 @@
                                     <td>{{application.PurposeOfVisit}}</td>
                                     <td>{{application.ApplicationType}}</td>
                                     <td>{{application.SubmissionDate |date:'dd/MM/yyyy'}}</td>
+                                    <td>{{application.AppointmentDate |date:'dd/MM/yyyy'}}</td>
+                                    <td>
+                                        <div *ngIf="application.Flag == 1; else showExpiry">
+                                            <!-- <span style="color:green">{{application.DaysLeft}} Days  {{application.HoursLeft}} Hours {{application.MinutesLeft}} minutes Left</span> -->
+                                            <span id="days"> {{application.DaysLeft}} </span>Day(s)
+                                            <span id="hours"> {{application.HoursRemaining}} </span>Hrs 
+                                            <span id="minutes"> {{application.MinutesRemaining}} </span>Min
+                                            <span id="seconds"> {{application.SecondsRemaining}} </span>S
+                                            <!-- <span id="days"> {{day}} </span>Day(s)
+                                            <span id="hours"> {{hour}} </span>Hrs 
+                                            <span id="minutes"> {{minutes}} </span>Min
+                                            <span id="seconds"> {{seconds}} </span>S -->
+                                        </div>
+                                        <ng-template #showExpiry>
+                                            <div *ngIf="application.Flag == 0; else showRemaining">
+                                                <span style="color:red">Application Expires</span>
+                                            </div>
+                                            
+                                        </ng-template>
+                                        <ng-template #showRemaining>
+                                            <div *ngIf="application.Status == 'Biometric Submitted' && application.Flag == 4; else showApproved">
+                                                <span style="color:blue">Pending for Immigration Approval</span>
+                                            </div>
+                                            <!-- {{application.DaysLeft}} -->
+                                        </ng-template>
+                                        <ng-template #showApproved>
+                                            <div *ngIf="(application.Status == 'Approved' || application.Status == 'Rejected') && application.Flag == 2; else showApproved">
+                                                <span style="color:blue">Application Approved</span>
+                                            </div>
+                                        </ng-template>
+                                    </td>
                                     <td>{{application.Status}}</td>
 
                                 </tr>

@@ -1,12 +1,12 @@
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <div class="container">    
     <div *ngIf="divLogin" id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
         <div class="panel panel-info" >
             <div class="panel-heading">
                 <div class="panel-title">OSC Sign In</div>
-                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+                <!-- <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div> -->
             </div>     
 
             <div style="padding-top:30px" class="panel-body" >
@@ -14,7 +14,17 @@
                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                         
                 <form id="loginform" #f="ngForm" class="form-horizontal" (ngSubmit)="f.form.valid && login()" novalidate  role="form">
-                            
+                    <div *ngIf="divError">
+                        <div class="row d-flex justify-content-center ">
+                            <div class="row">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <p class="text-danger">{{error}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                    <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <input id="txtEmail" type="text" class="form-control" name="txtEmail" value="" placeholder="username or email"
@@ -64,7 +74,9 @@
                               <a [routerLink]="" (click)="singUp()"> <!--onClick="$('#loginbox').hide(); $('#signupbox').show();">-->
                                   Sign Up Here
                               </a>
+                              <a href="#" style="float:right;">Forgot password?</a>
                            </div>
+                           <!-- <div style="float:right; font-size: 85%; padding-top:15px; "><a href="#">Forgot password?</a></div> -->
                         </div>
                     </div>    
                 </form> 

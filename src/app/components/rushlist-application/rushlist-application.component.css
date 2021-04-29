@@ -1,3 +1,9 @@
 a{
     color: #007bff !important;
 }
+table.dataTable.row-border thead th{
+    font-size: 12px;
+}
+table.dataTable.row-border tbody td{
+    font-size: 12px;
+}

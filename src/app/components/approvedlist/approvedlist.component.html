@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h3 class="pageheader-title">Extra Rush List Applications</h3>
+                    <h2 class="pageheader-title">Visa Approved List</h2>
                     <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                     
                 </div>
@@ -27,19 +27,20 @@
                                     <th>Type of visa</th>
                                     <th>Processing Time</th>
                                     <th>Date</th>
-                                    <th>Status</th>
+                                    <th>Approve Date</th>
+                                    <th>View</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr *ngFor="let application of ApplicationList; let i = index">
                                     <!-- <td>{{i+1}}</td> -->
                                     <td>
-                                        <div *ngIf="application.Status == 'Biometric Submitted' || application.Status == 'Approved'; else showRefNo">
+                                        <!-- <div *ngIf="application.Status == 'Biometric Submitted'; else showRefNo"> -->
                                             {{application.MyEVisaRefNo}}
-                                        </div>
-                                        <ng-template #showRefNo>
+                                        <!-- </div> -->
+                                        <!-- <ng-template #showRefNo>
                                             <a class="nav-link" [routerLink]="['/biometric',{applicationId:application.MyEVisaRefNo}]">{{application.MyEVisaRefNo}}</a>
-                                        </ng-template>
+                                        </ng-template> -->
                                         
                                         
                                     </td>
@@ -47,10 +48,30 @@
                                     <td>{{application.PurposeOfVisit}}</td>
                                     <td>{{application.ApplicationType}}</td>
                                     <td>{{application.SubmissionDate |date:'dd/MM/yyyy'}}</td>
-                                    <td>{{application.Status}}</td>
+                                    <td>{{application.ApprovalDate |date:'dd/MM/yyyy'}}</td>
+                                    <!-- <td>
+                                        <button type="submit"  class="btn btn-primary btn-sm" (click)="DownloadPDF(application.MyEVisaRefNo)">Download PDF</button>
+                                    </td> -->
+                                    <td>
+                                        <a [routerLink]="" (click)="viewFile(application.MyEVisaRefNo)" data-toggle="modal" data-target="#exampleModal"> 
+                                            View
+                                        </a>
+                                    </td>
 
                                 </tr>
                               </tbody>
+                              <tfoot>
+                                <tr>
+                                    <!-- <th>Id</th> -->
+                                    <th>Visa Reference Number</th>
+                                    <th>Name</th>
+                                    <th>Type of visa</th>
+                                    <th>Processing Time</th>
+                                    <th>Date</th>
+                                    <th>Approve Date</th>
+                                    <th>View</th>
+                                </tr>
+                              </tfoot>
 
                         </table>
                         
@@ -61,3 +82,5 @@
     </div>
     <app-footer></app-footer>
 </div>
+
+<div #dataContainer></div>

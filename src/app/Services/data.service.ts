@@ -11,7 +11,7 @@ export class DataService {
   private apiData = new BehaviorSubject<any>(null);
   public apiData$ = this.apiData.asObservable();
 
-  private API_TEST_SERVER  = "http://1.9.116.25/ARB-Service";//"http://192.168.0.10/ARB-Service";
+  private API_TEST_SERVER  = "https://www.midevs.com.my/arb-service";//"https://1.9.116.25/ARB-Service";
   private API_TEST_SERVER1 = "https://localhost:44372";
 
   constructor(private httpClient: HttpClient) { }
@@ -224,6 +224,34 @@ export class DataService {
       return throwError(error);
     }));
   }
+
+  public getApprovedListById(id){
+    var params=new HttpParams();
+    params=params.append('id',id);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/ApprovedApplicationsById', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
+  }
+
+  public getVisaDocumentsByVisaRefNo(visaRefNo):Observable<any>{
+    var params=new HttpParams();
+    params=params.append('VisaRefNo',visaRefNo);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/VisaDocumentsByVisaRefNo', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
+  
+  }
+
+  public getCenterByStaffId(id){
+    var params=new HttpParams();
+    params=params.append('staffid',id);
+
+    return this.httpClient.get(this.API_TEST_SERVER+ '/api/GetCenterByStaffId', {params: params}).pipe(map(response => response),catchError((error: HttpErrorResponse) => {
+      return throwError(error);
+    }));
+  } 
 
 
 }

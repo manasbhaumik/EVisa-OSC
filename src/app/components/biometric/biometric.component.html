@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">BIOMETRIC ENROLLMENT & VERIFICATION</h2>
+                    <h3 class="pageheader-title">Biometric Enrollment & Verification</h3>
                     <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
                           
                 </div>
@@ -19,20 +19,35 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="card">
-                    <h5 class="card-header">Search Visa Reference Number</h5>
+                    <h4 class="card-header" style="font-size: 15px !important;">Search Visa Reference Number</h4>
                     <div class="card-body">
-                        <div class="container">
+                        <div class="container">                           
                             <div class="row d-flex justify-content-center ">
                                 <form class="needs-validation" [formGroup]="applicantInfoForm" (ngSubmit)="getApplicantInfo()" >
+                                   
                                     <div class="row">
                                         <div class="form-group row">
-                                            <div class="col-md-4">Applicant Reference Number</div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
+                                                <label style="margin-top: 6px;">Applicant Reference Number</label>
+                                            </div>
+                                            
+                                            <div class="col-md-5">
                                                 <input type="text" class="form-control" formControlName="visaRefNo" placeholder="" [ngClass]="{ 'is-invalid': isSubmitted && f.visaRefNo.errors }"> 
                                                 <div *ngIf="isSubmitted && f.visaRefNo.errors" class="invalid-feedback">
                                                     <div *ngIf="f.visaRefNo.errors.required">Applicant Reference Number Required</div>                                    
                                                 </div>
                                            </div>
+                                           <!-- <div class="form-group mb-2">
+                                            <label for="staticEmail2" class="sr-only">Applicant Reference Number</label>
+                                            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Applicant Reference Number">
+                                          </div>
+                                          <div class="form-group mx-sm-3 mb-2">
+                                            <label for="inputPassword2" class="sr-only">Password</label>
+                                            <input type="text" class="form-control" formControlName="visaRefNo" placeholder="" [ngClass]="{ 'is-invalid': isSubmitted && f.visaRefNo.errors }"> 
+                                                <div *ngIf="isSubmitted && f.visaRefNo.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.visaRefNo.errors.required">Applicant Reference Number Required</div>                                    
+                                                </div>
+                                          </div> -->
                                            <div class="col-md-2">
                                             <!-- <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Enter</button>  -->
                                             <button type="submit" class="btn btn-primary" >Enter</button> 
@@ -55,281 +70,393 @@
                                             </div>
                                         </div>
                                     </div> 
+                                    <div class="row" *ngIf="divError">
+                                        <div class="row d-flex justify-content-center ">
+                                            <div class="row">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <p class="text-danger">{{error}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
+                                <!-- <form class="form-inline">
+                                    <div class="form-group mb-2">
+                                      <label for="staticEmail2" class="sr-only">Email</label>
+                                      <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
+                                    </div>
+                                    <div class="form-group mx-sm-3 mb-2">
+                                      <label for="inputPassword2" class="sr-only">Password</label>
+                                      <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+                                </form> -->
                             </div> 
-                            <div *ngIf="divApplicationInfo" >
-                                <form>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm text-right">Country Code</label>
-                                        <div class="col-sm-9">
-                                            <label class="form-control form-control-sm" #txtCountryCode>{{countryCode}}</label>
-                                          <!-- <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="col-form-label-sm"> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabel" class="col-sm-3 col-form-label text-right">Year</label>
-                                        <div class="col-sm-9">
-                                            <label class="form-control form-control-sm" #txtYear>{{year}}</label>
-                                          <!-- <input type="email" class="form-control" id="colFormLabel" placeholder="col-form-label"> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">Month</label>
-                                        <div class="col-sm-9">
-                                            <label class="form-control form-control-sm col-form-label" #txtMonth>{{month}}</label>
-                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">IOA Code</label>
-                                        <div class="col-sm-9">
-                                            <label class="form-control form-control-sm col-form-label" #txtIOACode>{{ioaCode}}</label>
-                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">Running Number</label>
-                                        <div class="col-sm-9">
-                                            <label class="form-control form-control-sm col-form-label" #txtRunningNo>{{rNo}}</label>
-                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">National Identity Card Number</label>
-                                        
-                                        <div class="col-sm-9">
-                                            <label class="form-control form-control-sm col-form-label" #txtNRICNo>{{nricNo}}</label>
-                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">International Passport</label>
-                                        <div class="col-sm-9">
-                                            <label class="form-control form-control-sm col-form-label" #txtPassportNo>{{passportNo}}</label>
-                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="colFormLabelLg" class="col-sm-3 col-form-label col-form-label-lg text-right">Applicant Name</label>
-                                        <div class="col-sm-9">
-                                            <label class="form-control form-control-sm col-form-label" #txtName>{{applicantName}}</label>
-                                          <!-- <input type="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="col-form-label-lg"> -->
-                                        </div>
-                                    </div>
-                                    <!-- <div class="form-group">
-                                        <div class="form-row">
-                                            <div class="col text-right">
-                                                Country Code: <label #txtCountryCode>{{countryCode}}</label>
-                                            </div>
-                                            <div class="col">
-                                              Year : <label #txtYear>{{year}}</label>
-                                            </div>
-                                            
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col text-right">
-                                                Month: <label #txtMonth>{{month}}</label>
-                                            </div>
-                                            <div class="col">
-                                              IOA Code : <label #txtIOACode>{{ioaCode}}</label>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-row">
-                                            <div class="col text-right">
-                                                Running Number: <label #txtRunningNo>{{rNo}}</label>
-                                            </div>
-                                            <div class="col">
-                                                National Identity Card Number : <label #txtNRICNo>{{nricNo}}</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col text-right">
-                                                International Passport: <label #txtPassportNo>{{passportNo}}</label>
-                                            </div>
-                                            <div class="col">
-                                                Applicant Name : <label #txtName>{{applicantName}}</label>
-                                            </div>
-                                        </div>
-                                    </div> -->                                 
-                                   
-
-
-                                    <!-- <div class="row d-flex justify-content-center">
-                                            <div class="form-group row">                                                
-                                                 <div class="col"> Country Code :  <label #txtCountryCode>{{countryCode}}</label></div>
-                                            
-                                            </div> 
-                                           
-                                    </div>  
-                                    <div class="row d-flex justify-content-center">
-                                    
-                                        <div class="form-group row">                                                
-                                            <div class="col"> Year :  <label #txtYear>{{year}}</label></div> 
-                                           
-                                                                                    
-                                       </div>   
-                                   </div>   -->
-
-                                      
-                                    <!-- <div class="row d-flex justify-content-center">
-                                            <div class="form-group row">                                                
-                                                 <div class="col-md-8">Year : </div>
-                                                
-                                                <div class="col-md-4">
-                                                    <label #txtYear>{{year}}</label>
-                                                </div>                                                                                              
-                                            </div>   
-                                    </div> -->
-                                    <!-- <div class="row d-flex justify-content-center">
-                                        <div class="row">
-                                            <div class="form-group row">                                                
-                                                 <div class="col-md-5"> Month</div>
-                                                <div class="col-md-1">:</div>
-                                                <div class="col-md-6">
-                                                    <label #txtMonth>{{month}}</label>
-                                                </div>                                                                                              
-                                            </div>   
-                                                                                    
-                                        </div>    
-                                    </div>   -->
-                                    <!-- <div class="row d-flex justify-content-center">
-                                        <div class="row">
-                                            <div class="form-group row">                                                
-                                                 <div class="col-md-5"> IOA Code</div>
-                                                <div class="col-md-1">:</div>
-                                                <div class="col-md-6">
-                                                    <label #txtIOACode>{{ioaCode}}</label>
-                                                </div>                                                                                              
-                                            </div>   
-                                                                                    
-                                        </div>    
-                                    </div>                                    -->
-                                       
-                                    <!-- <div class="row d-flex justify-content-center">
-                                        <div class="row">
-                                            <div class="form-group row">                                                
-                                                <div class="col-md-6">
-                                                    <label>Month</label>
-                                                    <input type="text" class="form-control" disabled  #txtMonth>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>IOA Code</label>
-                                                    <input type="text" class="form-control" disabled  #txtIOACode>
-                                                </div>
-                                            </div>   
-                                                                                    
-                                        </div>    
-                                    </div> -->
-                                    
-                                    <!-- <div class="row d-flex justify-content-center">
-                                        <div class="form-group row">
-                                            <div class="col-md-6">Running Number</div>
-                                            <div class="col-md-1">:</div>
-                                             <div class="col-md-4"> 
-                                                
-                                                <label #txtRunningNo>{{rNo}}</label>
-                                            </div>
-                                        </div>  
-                                    </div> -->
-                                   
-                                    <!-- <div class="row d-flex justify-content-center">
-                                        <div class="form-group row">
-                                            <div class="col-md-6">National Identity Card Number</div>
-                                            <div class="col-md-1">:</div>
-                                             <div class="col-md-4"> 
-                                                
-                                                <label #txtNRICNo>{{nricNo}}</label>
-                                            </div>
-                                        </div>  
-                                    </div> -->
-                                    <!-- <div class="row d-flex justify-content-center">
-                                        <div class="form-group row">
-                                            <div class="col-md-6">International Passport</div>
-                                            <div class="col-md-1">:</div>
-                                            <div class="col-md-4">
-                                                <label #txtPassportNo>{{passportNo}}</label>
-                                            </div>
-                                        </div>  
-                                    </div> -->
-                                    <!-- <div class="row d-flex justify-content-center">
-                                        <div class="form-group row">
-                                            <div class="col-md-6">Applicant Name</div>
-                                            <div class="col-md-1">:</div>
-                                            <div class="col-md-5">
-                                                <label #txtName>{{applicantName}}</label>
-                                            </div>
-                                        </div>  
-                                    </div>  -->
-                                    <div class="row d-flex justify-content-center">
-                                        <div class="form-group row">
-                                            <div class="col-md-2">                                            
-                                                <button type="submit" class="btn btn-primary" (click)="onFaceClick()" >Upload Photo</button> 
-    
-                                            </div>
-                                        </div>  
-                                    </div>
-                                </form>
-                            </div>
-                            <form>
+                            <div class="row" style="margin-top: 20px;">
                                 
-                              </form>
-                              
-                            <!-- <div *ngIf="divFaceCapturing">
-                                <div class="row d-flex justify-content-center ">
-                                    <div class="row">
-                                        <div class="form-group row">
-                                            <div class="col-md-12"> 
-                                                <video #video  autoplay width="320px" height="240px"></video>
+                                <div *ngIf="divApplicationInfo" class="mb-5" >
+                                    
+                                    <div class="row d-flex justify-content-center"><h2>Application Information</h2></div>
+                                    <hr/>
+                                    <form class="form-horizontal">
+                                        
+                                        <div class="form-row align-items-center">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Country Code</label>
+                                                <label  class="form-control"   #txtCountryCode>{{countryCode}}</label>
                                             </div>
-                                            <div class="col-md-6" >                                            
-                                                <canvas #canvas style="width: 100%;height: 210px;display: none;"></canvas>                                                
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Year</label>
+                                                <label class="form-control" #txtYear>{{year}}</label>
                                             </div>
-                                        </div>                                       
-                                    </div>   
-                                                                    
-                                </div>                                
-                                <div *ngIf="divSuccess">
-                                    <div class="row d-flex justify-content-center ">
-                                        <div class="row">
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
-                                                    <p class="text-success">Face Captured Success.</p>
-                                                </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Month</label>
+                                                <label class="form-control" #txtMonth>{{month}}</label>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">IOA Code</label>
+                                                <label class="form-control" #txtIOACode>{{ioaCode}}</label>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Running Number</label>
+                                                <label class="form-control" #txtRunningNo>{{rNo}}</label>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">National Identity Card Number</label>
+                                                <label class="form-control" #txtNRICNo>{{nricNo}}</label>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">International Passport</label>
+                                                <label class="form-control" #txtPassportNo>{{passportNo}}</label>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Applicant Name</label>
+                                                <label class="form-control" #txtName>{{applicantName}}</label>
                                             </div>
                                             
+                                            <!-- <div class="form-group col-md-6">
+                                                <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-left">Country Code</label>
+                                                <div class="col-sm-8">
+                                                    <label class="form-control form-control-sm" #txtCountryCode>{{countryCode}}</label>
+                                                  
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="form-group col-md-6">
+                                                <label for="colFormLabel" class="col-sm-4 col-form-label text-left">Year</label>
+                                                <div class="col-sm-8">
+                                                    <label class="form-control form-control-sm" #txtYear>{{year}}</label>
+                                                  
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="form-group col-md-6">
+                                                <label for="colFormLabelLg" class="col-sm-4 col-form-label col-form-label-lg text-left">Month</label>
+                                                <div class="col-sm-8">
+                                                    <label class="form-control form-control-sm col-form-label" #txtMonth>{{month}}</label>
+                                                 
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="colFormLabelLg" class="col-sm-4 col-form-label col-form-label-lg text-left">IOA Code</label>
+                                                <div class="col-sm-8">
+                                                    <label class="form-control form-control-sm col-form-label" #txtIOACode>{{ioaCode}}</label>
+                                                 
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="form-group col-md-6">
+                                                <label for="colFormLabelLg" class="col-sm-4 col-form-label col-form-label-lg text-left">Running Number</label>
+                                                <div class="col-sm-8">
+                                                    <label class="form-control form-control-sm col-form-label" #txtRunningNo>{{rNo}}</label>
+                                                 
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg text-left">National Identity Card Number</label>
+                                                
+                                                <div class="col-sm-8">
+                                                    <label class="form-control form-control-sm col-form-label" #txtNRICNo>{{nricNo}}</label>
+                                                  
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="form-group col-md-6">
+                                                <label for="colFormLabelLg" class="col-sm-6 col-form-label col-form-label-lg text-left">International Passport</label>
+                                                <div class="col-sm-8">
+                                                    <label class="form-control form-control-sm col-form-label" #txtPassportNo>{{passportNo}}</label>
+                                                 
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="colFormLabelLg" class="col-sm-4 col-form-label col-form-label-lg text-left">Applicant Name</label>
+                                                <div class="col-sm-8">
+                                                    <label class="form-control form-control-sm col-form-label" #txtName>{{applicantName}}</label>
+                                                  
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <hr>
+                                        <div class="form-row" style="float:right;">
+                                            <button type="submit" class="btn btn-primary" (click)="onFaceClick()" >Face Capturing</button> 
+                                        </div>
+                                        <!-- <form>
+                                            <div class="form-row">
+                                              <div class="form-group col-md-6">
+                                                <label for="inputEmail4">Email</label>
+                                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                              </div>
+                                              <div class="form-group col-md-6">
+                                                <label for="inputPassword4">Password</label>
+                                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                              </div>
+                                            </div>
+                                            
+                                            
+                                             
+                                           
+                                            <button type="submit" class="btn btn-primary">Sign in</button>
+                                        </form> -->
+                                        
+                                       
+                                        <!-- <div class="form-group">
+                                            <div class="form-row">
+                                                <div class="col text-right">
+                                                    Country Code: <label #txtCountryCode>{{countryCode}}</label>
+                                                </div>
+                                                <div class="col">
+                                                  Year : <label #txtYear>{{year}}</label>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col text-right">
+                                                    Month: <label #txtMonth>{{month}}</label>
+                                                </div>
+                                                <div class="col">
+                                                  IOA Code : <label #txtIOACode>{{ioaCode}}</label>
+                                                </div>
+                                            </div>
+    
+    
+                                            <div class="form-row">
+                                                <div class="col text-right">
+                                                    Running Number: <label #txtRunningNo>{{rNo}}</label>
+                                                </div>
+                                                <div class="col">
+                                                    National Identity Card Number : <label #txtNRICNo>{{nricNo}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col text-right">
+                                                    International Passport: <label #txtPassportNo>{{passportNo}}</label>
+                                                </div>
+                                                <div class="col">
+                                                    Applicant Name : <label #txtName>{{applicantName}}</label>
+                                                </div>
+                                            </div>
+                                        </div> -->                                 
+                                       
+    
+    
+                                        <!-- <div class="row d-flex justify-content-center">
+                                                <div class="form-group row">                                                
+                                                     <div class="col"> Country Code :  <label #txtCountryCode>{{countryCode}}</label></div>
+                                                
+                                                </div> 
+                                               
+                                        </div>  
+                                        <div class="row d-flex justify-content-center">
+                                        
+                                            <div class="form-group row">                                                
+                                                <div class="col"> Year :  <label #txtYear>{{year}}</label></div> 
+                                               
+                                                                                        
+                                           </div>   
+                                       </div>   -->
+    
+                                          
+                                        <!-- <div class="row d-flex justify-content-center">
+                                                <div class="form-group row">                                                
+                                                     <div class="col-md-8">Year : </div>
+                                                    
+                                                    <div class="col-md-4">
+                                                        <label #txtYear>{{year}}</label>
+                                                    </div>                                                                                              
+                                                </div>   
+                                        </div> -->
+                                        <!-- <div class="row d-flex justify-content-center">
+                                            <div class="row">
+                                                <div class="form-group row">                                                
+                                                     <div class="col-md-5"> Month</div>
+                                                    <div class="col-md-1">:</div>
+                                                    <div class="col-md-6">
+                                                        <label #txtMonth>{{month}}</label>
+                                                    </div>                                                                                              
+                                                </div>   
+                                                                                        
+                                            </div>    
+                                        </div>   -->
+                                        <!-- <div class="row d-flex justify-content-center">
+                                            <div class="row">
+                                                <div class="form-group row">                                                
+                                                     <div class="col-md-5"> IOA Code</div>
+                                                    <div class="col-md-1">:</div>
+                                                    <div class="col-md-6">
+                                                        <label #txtIOACode>{{ioaCode}}</label>
+                                                    </div>                                                                                              
+                                                </div>   
+                                                                                        
+                                            </div>    
+                                        </div>                                    -->
+                                           
+                                        <!-- <div class="row d-flex justify-content-center">
+                                            <div class="row">
+                                                <div class="form-group row">                                                
+                                                    <div class="col-md-6">
+                                                        <label>Month</label>
+                                                        <input type="text" class="form-control" disabled  #txtMonth>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>IOA Code</label>
+                                                        <input type="text" class="form-control" disabled  #txtIOACode>
+                                                    </div>
+                                                </div>   
+                                                                                        
+                                            </div>    
+                                        </div> -->
+                                        
+                                        <!-- <div class="row d-flex justify-content-center">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">Running Number</div>
+                                                <div class="col-md-1">:</div>
+                                                 <div class="col-md-4"> 
+                                                    
+                                                    <label #txtRunningNo>{{rNo}}</label>
+                                                </div>
+                                            </div>  
+                                        </div> -->
+                                       
+                                        <!-- <div class="row d-flex justify-content-center">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">National Identity Card Number</div>
+                                                <div class="col-md-1">:</div>
+                                                 <div class="col-md-4"> 
+                                                    
+                                                    <label #txtNRICNo>{{nricNo}}</label>
+                                                </div>
+                                            </div>  
+                                        </div> -->
+                                        <!-- <div class="row d-flex justify-content-center">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">International Passport</div>
+                                                <div class="col-md-1">:</div>
+                                                <div class="col-md-4">
+                                                    <label #txtPassportNo>{{passportNo}}</label>
+                                                </div>
+                                            </div>  
+                                        </div> -->
+                                        <!-- <div class="row d-flex justify-content-center">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">Applicant Name</div>
+                                                <div class="col-md-1">:</div>
+                                                <div class="col-md-5">
+                                                    <label #txtName>{{applicantName}}</label>
+                                                </div>
+                                            </div>  
+                                        </div>  -->
+                                        
+                                        <!-- <div class="row d-flex justify-content-center">
+                                            <div class="form-group row">
+                                                <div class="col-md-2">                                            
+                                                    <button type="submit" class="btn btn-primary" (click)="onFaceClick()" >Face Capturing</button> 
+        
+                                                </div>
+                                            </div>  
+                                        </div> -->
+                                    </form>
+                                </div>
+
+                            </div>
+                            <div class="row d-flex justify-content-center" style="margin-top: 20px;">
+                                <div *ngIf="divFaceCapturing"> 
+                                    <div class="row d-flex justify-content-center"><h2>Face Capturing</h2> </div> 
+                                    <hr>                            
+                                    <div class="row d-flex justify-content-center "> 
+                                                                           
+                                        <div class="row">
+                                           
+                                            <div class="form-group row">
+                                                <!-- <div #Camera style="height:189px;width:132px; text-align:left;"></div> -->
+                                                <!-- <div class="col-md-6"> 
+                                                    <video #video  autoplay  width="auto" height="auto"></video>
+                                                </div> -->
+                                                <div class="container1">
+                                                    <video #video autoplay></video>
+                                                    <div class="photoArea"></div>
+                                                </div>
+                                                <!-- <canvas #canvas width='140' height='190' style="border:1px solid #d3d3d3;"></canvas> -->
+                                                <div class="col-md-6" >                                                    
+                                                    <canvas #canvas width='140' height='190' style="border: 1px solid #d3d3d3;display: none;"></canvas>
+                                                </div>
+                                                <!-- <img [src]="imageSrc" *ngIf="imageSrc" style="height: 189px; width:132px">-->
+                                            </div>   
+                                                                             
+                                        </div>   
+                                                                        
+                                    </div>                                
+                                    <div *ngIf="divSuccess">
+                                        <div class="row d-flex justify-content-center ">
+                                            <div class="row">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <p class="text-success">{{FaceCaptureSuccessMessage}}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div *ngIf="divError">
-                                    <div class="row d-flex justify-content-center ">
-                                        <div class="row">
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
-                                                    <p class="text-success">{{error}}</p>
+                                    <div *ngIf="divFaceCaptureError">
+                                        <div class="row d-flex justify-content-center ">
+                                            <div class="row">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <p class="text-danger">{{FaceCaptureErrorMessage}}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row d-flex justify-content-center ">
-                                    <div class="row">
-                                        <div class="form-group row">
-                                            <div class="col-md-6">
-                                                <button type="button" class="btn btn-primary" (click)="savePhoto()">save</button>
+                                    <hr>
+                                    <div class="row d-flex justify-content-center" style="float:right;">
+                                        <button type="button" class="btn btn-primary" style="float:right" (click)="savePhoto()">Take Photo</button>&nbsp;
+                                        <!-- <button type="button" class="btn btn-primary" (click)="takeSnapShot()">save</button> -->
+                                        <button type="button" class="btn btn-primary" style="float:right" (click)="saveFingerCapture()">Save & Continue</button>
+                                    </div>
+                                    <!-- <div class="row d-flex justify-content-center ">
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-primary" (click)="savePhoto()">Take Photo</button>
+                                                    
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-primary" (click)="saveFingerCapture()">Save & Continue</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>                               
-                            </div> -->
-                            <div *ngIf="divFaceCapturing">
-                                <div class="row d-flex justify-content-center ">
+                                    </div>                                -->
+                                </div>
+
+                            </div>
+                           
+                              
+                           
+                            <!-- <div *ngIf="divFaceCapturing">
+                                <div class="row d-flex justify-content-center">
                                     <div class="row">
                                         <form [formGroup] = "uploadPhotoForm" (ngSubmit)="onPhotoSubmit()">  
                                             <div class="form-group row">
                                                 <div class="col-md-4">Upload Photo </div>
-                                                <!-- <label for="file">Upload Photo</label> -->
                                                 <div class="col-md-6">
                                                     <input 
                                                     formControlName="profile"
@@ -376,7 +503,472 @@
                                 </div>
                                
 
+                            </div> -->
+                            <div class="row d-flex justify-content-center" style="margin-top: 20px;">
+                                <div *ngIf="divFingerCapturing">
+                                    <div class="row d-flex justify-content-center"> <h2>10 Fingerprints Capturing</h2></div>
+                                    <hr>
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="row">
+                                            <!-- <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    <img src="assets\images\R0.jpg" width="50px" >
+                                                    <img src="assets\images\R0.jpg" width="50px" >
+                                                    <img src="assets\images\R0.jpg" width="50px" >
+                                                    <img src="assets\images\R0.jpg" width="50px" >
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <img src="assets\images\L0.jpg" width="50px" >
+                                                    <img src="assets\images\L0.jpg" width="50px" >
+                                                    <img src="assets\images\L0.jpg" width="50px" >
+                                                    <img src="assets\images\L0.jpg" width="50px" >
+                                                </div>
+                                              
+    
+                                            </div> -->
+                                            
+
+                                            <table border="1" cellspacing="0" cellpadding="0" width="100%">
+                                                <tr>
+                                                  <td width="38" valign="top"><p>L0</p></td>
+                                                  <td width="239" rowspan="5" valign="top" align="center"><img src="https://media.giphy.com/media/26tn66XDQtXadfWrS/giphy.gif" width="150px" height="200px"></td>
+                                                  <td width="243" rowspan="5" valign="top" align="center"><img src="https://media.giphy.com/media/26tn66XDQtXadfWrS/giphy.gif" width="150px" height="200px"></td>
+                                                  <td width="33" valign="top"><p>R0</p></td>
+                                                </tr>
+                                                <tr>
+                                                  <td width="38" valign="top"><p>L1</p></td>
+                                                  <td width="33" valign="top"><p>R1</p></td>
+                                                </tr>
+                                                <tr>
+                                                  <td width="38" valign="top"><p>L2</p></td>
+                                                  <td width="33" valign="top"><p>R2</p></td>
+                                                </tr>
+                                                <tr>
+                                                  <td width="38" valign="top"><p>L3</p></td>
+                                                  <td width="33" valign="top"><p>R3</p></td>
+                                                </tr>
+                                                <tr>
+                                                  <td width="38" valign="top"><p>L4</p></td>
+                                                  <td width="33" valign="top"><p>R4</p></td>
+                                                </tr>
+                                                <tr>
+                                                  <td width="38" valign="top"><p>&nbsp;</p></td>
+                                                  <td width="239" valign="top" align="center"><button type="button" class="btn btn-primary" >Left Fingerprints</button></td>
+                                                  <td width="243" valign="top" align="center"><button type="button" class="btn btn-primary" >Right Fingerprints</button></td>
+                                                  <td width="33" valign="top"><p>&nbsp;</p></td>
+                                                </tr>
+                                              </table>
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- <div class="row d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                  
+                                                  <img colspan="3" src="assets\images\R0.jpg" width="50px">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <img colspan="3" src="assets\images\L0.jpg" width="50px">
+                                                </div>
+    
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="row d-flex justify-content-center">
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <div class="col-md-6" ><button type="button" class="btn btn-primary" >Left Fingerprints</button> </div>
+                                                <div class="col-md-6" ><button type="button" class="btn btn-primary" >Right Fingerprints</button> </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div *ngIf="divFingerSuccess">
+                                        <div class="row d-flex justify-content-center ">
+                                            <div class="row">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <p class="text-success">{{FingerSuccessMessage}}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="divFingerError">
+                                        <div class="row d-flex justify-content-center ">
+                                            <div class="row">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <p class="text-danger">{{FingerErrorMessage}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                   
+                                   <hr>
+                                   <div class="row" style="float:right;">
+                                        <button type="button" class="btn btn-primary" (click)="saveFinger()" >Save & Continue</button>
+                                   </div>
+                                    <!-- <div class="row d-flex justify-content-center " >
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    
+                                                    <button type="button" class="btn btn-primary" (click)="saveFinger()" >Save & Continue</button>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>   -->
+                                   
+                                </div>
+
                             </div>
+                            
+                            <div class="row  d-flex justify-content-center" style="margin-top: 20px;">
+                                <div *ngIf="divDocuments" class="mb-5">
+                                    <div class="row d-flex justify-content-center"> <h2>List Of Scanned Documents</h2></div>
+                                    <!-- <hr> -->
+                                    <div class="row">
+                                        <form>
+                                            <!-- <div class="form-group row">
+                                              <label for="staticEmail" class="col-xs-6 col-md-7">International Passport</label>
+                                              <div class="col-xs-6 col-md-4">
+                                                <button type="button" class="btn btn-primary"  >Scan</button>&nbsp;
+                                                <button type="button" class="btn btn-primary"  >Save</button>
+                                              </div>
+                                            </div>
+                                            <div class="form-group row">
+                                              <label for="inputPassword" class="col-xs-6 col-md-7">National Registration Identify Card (NRIC)</label>
+                                              <div class="col-xs-6 col-md-5">
+                                                <button type="button" class="btn btn-primary"  >Scan</button>&nbsp;
+                                                <button type="button" class="btn btn-primary"  >Save</button>
+                                              </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputPassword" class="col-xs-6 col-md-7">Detail (Confirmed Return Ticket)</label>
+                                                <div class="col-xs-6 col-md-5">
+                                                  <button type="button" class="btn btn-primary"  >Scan</button>&nbsp;
+                                                  <button type="button" class="btn btn-primary"  >Save</button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputPassword" class="col-xs-6 col-md-7">Sponsor Letter – If required.</label>
+                                                <div class="col-xs-6 col-md-5">
+                                                  <button type="button" class="btn btn-primary"  >Scan</button>&nbsp;
+                                                  <button type="button" class="btn btn-primary"  >Save</button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputPassword" class="col-xs-6 col-md-7">Sufficient Fund (Credit Card or Debit Card)</label>
+                                                <div class="col-xs-6 col-md-5">
+                                                  <button type="button" class="btn btn-primary"  >Scan</button>&nbsp;
+                                                  <button type="button" class="btn btn-primary"  >Save</button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputPassword" class="col-xs-6 col-md-7">Certificate of Vaccination Yellow Fever (YF-VAX)</label>
+                                                <div class="col-xs-6 col-md-5">
+                                                  <button type="button" class="btn btn-primary"  >Scan</button>&nbsp;
+                                                  <button type="button" class="btn btn-primary"  >Save</button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputPassword" class="col-xs-6 col-md-7">Covid-19 Free / Asymptomatic Certificate (For Traveller)</label>
+                                                <div class="col-xs-6 col-md-5">
+                                                  <button type="button" class="btn btn-primary"  >Scan</button>&nbsp;
+                                                  <button type="button" class="btn btn-primary"  >Save</button>
+                                                </div>
+                                            </div> -->
+                                            <table width="100%" border="1" cellspacing="10" cellpadding="0">
+                                                <tbody>
+                                                  <tr>
+                                                    <td scope="col">International Passport</td>
+                                                    <td scope="col"><button type="button" class="btn btn-primary" (click)="ScanPasport()"  >Scan</button></td>
+                                                    <td scope="col"><button type="button" class="btn btn-primary"  >Save</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>National Registration Identify Card (NRIC)</td>
+                                                    <td><button type="button" class="btn btn-primary" (click)="ScanNRIC()"  >Scan</button></td>
+                                                    <td><button type="button" class="btn btn-primary"  >Save</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Detail (Confirmed Return Ticket)</td>
+                                                    <td><button type="button" class="btn btn-primary" (click)="ScanTicket()"  >Scan</button></td>
+                                                    <td><button type="button" class="btn btn-primary"  >Save</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Sponsor Letter – If required.</td>
+                                                    <td><button type="button" class="btn btn-primary" (click)="ScanSponsorLetter()"  >Scan</button></td>
+                                                    <td><button type="button" class="btn btn-primary"  >Save</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Sufficient Fund (Credit Card or Debit Card)</td>
+                                                    <td><button type="button" class="btn btn-primary" (click)="ScanSufficientFund()"  >Scan</button></td>
+                                                    <td><button type="button" class="btn btn-primary"  >Save</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Certificate of Vaccination Yellow Fever (YF-VAX)</td>
+                                                    <td><button type="button" class="btn btn-primary" (click)="ScanYellowFever()"  >Scan</button></td>
+                                                    <td><button type="button" class="btn btn-primary"  >Save</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td>Covid-19 Free / Asymptomatic Certificate (For Traveller)</td>
+                                                    <td><button type="button" class="btn btn-primary" (click)="ScanCovid19()"  >Scan</button></td>
+                                                    <td><button type="button" class="btn btn-primary"  >Save</button></td>
+                                                  </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <div class="form-group row">
+                                                <div class="col-md-12" >
+                                                    <div #displayScanDoc style="border:1px solid black;padding: 50px;"></div>
+                                                    <!-- <textarea class="form-control" rows="6" #displayScanDoc>{{displayScanDocuments}}</textarea> -->
+                                                </div>
+                                                
+                                            </div>
+                                        </form>
+                                        <!--<div class="row mt-3">                                         
+                                            
+                                            <div class="col-md-6">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <form *ngIf="UploadPassportForm" [formGroup]="UploadPassportForm" >                                                        
+                                                            <div class="form-group">
+                                                                <label for="file">International Passport</label>
+                                                                <input 
+                                                                    formControlName="uploadPassport"
+                                                                    id="file" 
+                                                                    type="file" 
+                                                                    class="form-control"
+                                                                    (change)="onFileChange($event)"  [ngClass]="{ 'is-invalid': isSubmitted && f1.uploadPassport.errors }">
+                                                                    <div *ngIf="isSubmitted && f1.uploadPassport.errors" class="invalid-feedback">
+                                                                        <div *ngIf="f1.uploadPassport.errors.required">Upload International Passport</div>
+                                                                    </div>
+                                                                   
+                                                            </div>
+    
+                                                        </form>
+    
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!-- <div class="col-md-6">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <form *ngIf="UploadNRICForm" [formGroup]="UploadNRICForm" >
+                                                            <div class="form-group">
+                                                                <label for="file">National Registration Identity Card</label>
+                                                                <input 
+                                                                    formControlName="UploadNRIC"
+                                                                    id="UploadNRIC" 
+                                                                    type="file" 
+                                                                    class="form-control"
+                                                                    (change)="onFileChange($event)" [ngClass]="{ 'is-invalid': isSubmitted && f2.UploadNRIC.errors }">
+                                                                    <div *ngIf="isSubmitted && f2.UploadNRIC.errors" class="invalid-feedback">
+                                                                        <div *ngIf="f2.UploadNRIC.errors.required">Upload NRIC.</div>
+                                                                    </div>
+                                                               
+                                                            </div>
+    
+                                                        </form>
+    
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>-->
+                                        
+                                        <!-- <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <form *ngIf="UploadFlightForm" [formGroup]="UploadFlightForm" >
+                                                            <div class="form-group">
+                                                                <label for="file">Flight Detail(Confirmed return ticket)</label>
+                                                                <input 
+                                                                    formControlName="UploadFlight"
+                                                                    id="UploadFlight" 
+                                                                    type="file" 
+                                                                    class="form-control"
+                                                                    (change)="onFileChange($event)" [ngClass]="{ 'is-invalid': isSubmitted && f3.UploadFlight.errors }">
+                                                                    <div *ngIf="isSubmitted && f3.UploadFlight.errors" class="invalid-feedback">
+                                                                        <div *ngIf="f3.UploadFlight.errors.required">Upload Flight Detail.</div>
+                                                                    </div>
+                                                              
+                                                            </div>
+    
+                                                        </form>
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <form *ngIf="UploadSponsorForm" [formGroup]="UploadSponsorForm" >
+                                                            <div class="form-group">
+                                                                <label for="file">Sponsor Letters – If required</label>
+                                                                <input 
+                                                                    formControlName="UploadSponsor"
+                                                                    id="file6" 
+                                                                    type="file" 
+                                                                    class="form-control"
+                                                                    (change)="onFileChange($event)" >
+                                                               
+                                                            </div>
+    
+                                                        </form>
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div> -->
+                                        
+                                        <!-- <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <form *ngIf="UploadFundForm" [formGroup]="UploadFundForm" >
+                                                            <div class="form-group">
+                                                                <label for="file">Sufficient Fund (Debit Card or Credit Card)</label>
+                                                                <input 
+                                                                    formControlName="UploadFund"
+                                                                    id="file3" 
+                                                                    type="file" 
+                                                                    class="form-control"
+                                                                    (change)="onFileChange($event)"
+                                                                    [ngClass]="{ 'is-invalid': isSubmitted && f4.UploadFund.errors }">
+                                                                    <div *ngIf="isSubmitted && f4.UploadFund.errors" class="invalid-feedback">
+                                                                        <div *ngIf="f4.UploadFund.errors.required">Upload Sufficient Fund.</div>
+                                                                    </div>
+                                                            </div>
+    
+                                                        </form>
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <form *ngIf="UploadYellowFeverForm" [formGroup]="UploadYellowFeverForm" >
+                                                            <div class="form-group">
+                                                                <label for="file">Certificate of Vaccination Yellow Fever (YF-VAX)</label>
+                                                                <input 
+                                                                    formControlName="UploadYellowFever"
+                                                                    id="UploadYellowFever" 
+                                                                    type="file" 
+                                                                    class="form-control"
+                                                                    (change)="onFileChange($event)"
+                                                                    [ngClass]="{ 'is-invalid': isSubmitted && f5.UploadYellowFever.errors }">
+                                                                    <div *ngIf="isSubmitted && f5.UploadYellowFever.errors" class="invalid-feedback">
+                                                                        <div *ngIf="f5.UploadYellowFever.errors.required">Upload Yellow Fever Certificate.</div>
+                                                                    </div>
+                                                                
+                                                            </div>
+    
+                                                        </form>
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </div> -->
+                                        <!-- <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <form *ngIf="UploadCovid19Form" [formGroup]="UploadCovid19Form" >
+                                                            <div class="form-group">
+                                                                <label for="file">Covid-19 Free / Asymptomatic Certificate (For Traveler)</label>
+                                                                <input 
+                                                                    formControlName="UploadCovid19"
+                                                                    id="UploadCovid19" 
+                                                                    type="file" 
+                                                                    class="form-control"
+                                                                    (change)="onFileChange($event)" [ngClass]="{ 'is-invalid': isSubmitted && f6.UploadCovid19.errors }">
+                                                                    <div *ngIf="isSubmitted && f6.UploadCovid19.errors" class="invalid-feedback">
+                                                                        <div *ngIf="f6.UploadCovid19.errors.required">Upload Covid-19 / Asymtomatic Certificate.</div>
+                                                                    </div>
+                                                                
+                                                            </div>
+    
+                                                        </form>
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        
+                                        <!-- <div class="row mt-3">
+                                            <div class="col-md-10">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <form [formGroup]="myForm6" >
+                                                            <div class="form-group">
+                                                                <label for="file">Sponsor Letters – If required</label>
+                                                                <input 
+                                                                    formControlName="file6"
+                                                                    id="file6" 
+                                                                    type="file" 
+                                                                    class="form-control"
+                                                                    (change)="onFileChange($event)">
+                                                               
+                                                            </div>
+    
+                                                        </form>
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+    
+                                    </div>
+                                    <div *ngIf="divDocumentSuccess">
+                                        <div class="row d-flex justify-content-center ">
+                                            <div class="row">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <p class="text-success">{{DocumentSuccessMessage}}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="divDocumentError">
+                                        <div class="row d-flex justify-content-center ">
+                                            <div class="row">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <p class="text-danger">{{DocumentErrorMessage}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                   
+                                    <hr>
+                                    <div class="row d-flex justify-content-center" style="float:right;">
+                                        <button type="button" class="btn btn-primary" (click)="saveDocuments()" >Send & Continue</button>
+                                    </div>
+                                    <!-- <div class="row d-flex justify-content-center ">
+                                        <div class="row">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    
+                                                    <button type="button" class="btn btn-primary" (click)="saveDocuments()" >Save</button>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>   -->
+    
+                                </div>
+                            </div>
+                            
 
                             <div class="row" >                                
                                
@@ -485,7 +1077,7 @@
                                                     
                                                     
                                                     <div id="step-3" class="">
-                                                        <div class="row">
+                                                        <!-- <div class="row">
                                                             <div class="col-md-6" >
                                                                  <img src="assets\images\R0.jpg" width="50px">
                                                                  <img src="assets\images\R0.jpg" width="50px">
@@ -528,7 +1120,7 @@
                                                             <div class="col-md-12">
                                                                 <p class="text-danger">{{error}}</p>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     
                                                     
@@ -551,7 +1143,7 @@
                                                                              </button>
                                                                           </span>
                                                                       </div> -->
-                                                                      <form [formGroup]="myForm"  (ngsubmit)="submit()">
+                                                                      <!-- <form [formGroup]="myForm22"  (ngsubmit)="submit()"> -->
   
                                                                         <!-- <div class="form-group">
                                                                             <label for="name">Name</label>
@@ -566,7 +1158,7 @@
                                                                             </div>
                                                                         </div> -->
                                                                           
-                                                                        <div class="form-group">
+                                                                        <!-- <div class="form-group">
                                                                             <label for="file">International Passport</label>
                                                                             <input 
                                                                                 formControlName="file"
@@ -574,13 +1166,11 @@
                                                                                 type="file" 
                                                                                 class="form-control"
                                                                                 (change)="onFileChange($event)">
-                                                                            <!-- <div *ngIf="f1.file.touched && f1.file.invalid" class="alert alert-danger">
-                                                                                <div *ngIf="f1.file.errors.required">File is required.</div>
-                                                                            </div> -->
-                                                                        </div>
+                                                                            
+                                                                        </div> -->
                                                                               
                                                                         <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
-                                                                    </form>
+                                                                    <!-- </form> -->
                                   
                                                                     </div>
                                  
@@ -588,7 +1178,7 @@
                                                                 <!-- <span>Thanks For submitting your details with My E-Visa. we will send you a confirmation email. We will review your details and revert back.</span> -->
                                                            </div>
                                                         </div>
-                                                        <div class="row mt-3">
+                                                        <!-- <div class="row mt-3">
                                                             <div class="col-md-10">
                                                                 <div class="control-group">
                                                                     <div class="controls">
@@ -601,9 +1191,7 @@
                                                                                     type="file" 
                                                                                     class="form-control"
                                                                                     (change)="onFileChange($event)">
-                                                                                <!-- <div *ngIf="f1.file.touched && f1.file.invalid" class="alert alert-danger">
-                                                                                    <div *ngIf="f1.file.errors.required">File is required.</div>
-                                                                                </div> -->
+                                                                               
                                                                             </div>
 
                                                                         </form>
@@ -625,9 +1213,7 @@
                                                                                     type="file" 
                                                                                     class="form-control"
                                                                                     (change)="onFileChange($event)">
-                                                                                <!-- <div *ngIf="f1.file.touched && f1.file.invalid" class="alert alert-danger">
-                                                                                    <div *ngIf="f1.file.errors.required">File is required.</div>
-                                                                                </div> -->
+                                                                               
                                                                             </div>
 
                                                                         </form>
@@ -649,9 +1235,7 @@
                                                                                     type="file" 
                                                                                     class="form-control"
                                                                                     (change)="onFileChange($event)">
-                                                                                <!-- <div *ngIf="f1.file.touched && f1.file.invalid" class="alert alert-danger">
-                                                                                    <div *ngIf="f1.file.errors.required">File is required.</div>
-                                                                                </div> -->
+                                                                               
                                                                             </div>
 
                                                                         </form>
@@ -673,9 +1257,7 @@
                                                                                     type="file" 
                                                                                     class="form-control"
                                                                                     (change)="onFileChange($event)">
-                                                                                <!-- <div *ngIf="f1.file.touched && f1.file.invalid" class="alert alert-danger">
-                                                                                    <div *ngIf="f1.file.errors.required">File is required.</div>
-                                                                                </div> -->
+                                                                               
                                                                             </div>
 
                                                                         </form>
@@ -727,7 +1309,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                 </div>
                                             </div>

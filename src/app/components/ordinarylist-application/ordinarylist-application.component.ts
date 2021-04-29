@@ -37,7 +37,7 @@ export class OrdinarylistApplicationComponent implements OnInit {
            pageLength: 10,
            processing: true,
            //lengthMenu : [5, 10, 25],
-           order:[[1,"desc"]]
+           order:[[3,'desc']]
          }) ;
        },1);
  

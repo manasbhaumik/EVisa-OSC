@@ -8,12 +8,16 @@ import { DataService } from 'src/app/Services/data.service';
 })
 export class DashboardComponent implements OnInit {
 
+  title = "One Stop Center Dashboarad";
+  centerName : any;
   StaffId:any;
   TtlApplicationCnt:any;
   TtlCurrentCnt:any;
   TtlPendingCnt:any;
   TtlApprovedCnt:any;
   RecentApplicationList:any;
+  CentersList : any;
+
   constructor(
     private dataService:DataService
   ) { }
@@ -24,6 +28,11 @@ export class DashboardComponent implements OnInit {
       this.StaffId = data.StaffID;
       this.dataService.staffId = data.StaffID;
       localStorage.setItem('staffId',this.StaffId);
+
+      this.dataService.getCenterByStaffId(this.StaffId).subscribe((data:any)=>{
+        this.CentersList = data;
+        this.centerName = data[0].Ciiy;
+      });
 
       this.dataService.getDashboardCountById(this.StaffId).subscribe((data:any)=>{
         //console.log(data);
@@ -48,6 +57,15 @@ export class DashboardComponent implements OnInit {
       this.dataService.getDashboardRecentApplicationsById(this.StaffId).subscribe(res=>{
         //console.log(res);
        this.RecentApplicationList =res;
+       setTimeout(()=>{                          
+        $('#datatableRecent').DataTable( {
+            pagingType: 'simple_numbers',
+            pageLength: 10,
+            processing: true,
+            //lengthMenu : [5, 10, 25],
+            order:[[5,"desc"]]
+          }) ;
+        },1);
       });
 
 

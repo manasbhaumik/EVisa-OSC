@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef,MatDialogConfig ,MAT_DIALOG_DATA} from  '@angul
 import { AuthenticationServiceService } from 'src/app/Services/authentication-service.service';
 import { TokenStorageService } from 'src/app/Services/token-storage.service';
 import { ModalPopupComponent } from 'src/app/Modal/modal-popup/modal-popup.component';
+import { DataService } from 'src/app/Services/data.service';
 
 export class User{
   public email:string;
@@ -24,10 +25,11 @@ export class LoginComponent implements OnInit {
   closeResult: string;
   divLogin : boolean = true;
   divSignup : boolean = false;
+  divError : boolean = false;
 
   constructor(
     private http: HttpClient,
-    //private dataService:DataService,
+    private dataService:DataService,
     private route: ActivatedRoute,
     private router: Router,
     private authentictionService:AuthenticationServiceService,
@@ -56,35 +58,56 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.authentictionService.userAuthentication(this.user.email,this.user.password)
-      .subscribe((data:any)=>{console.log(data);
+      .subscribe((data:any)=>{//console.log(data);
       this.tokenStorage.saveToken(data.access_token);
       this.tokenStorage.saveUser(data.userName);
-      var dialogRef= this.dialog.open(ModalPopupComponent,{ data: {
-        message : "Hi, "+ data.userName +" , Welcome to OSC portal",
-        title : "Success",
-        buttonText : "Ok"
-      }});  
-      dialogRef.afterClosed().subscribe(
-        result => {
-         this.returnUrl = result;
-         this.router.navigate(['/home/dashboard']).then(() => {
-           window.location.reload();
-         });
+      this.dataService.getContact().subscribe((data:any)=>{
+        if(data.StaffID == null)
+        {
+          //alert("1");
+          this.error = "You are not authorized to Login"
+          this.divError = true;
         }
-     ); 
+        else{
+          //alert("2");
+          if(data.StaffID == ""){
+            this.error = "You are not authorized to Login"
+            this.divError = true;
+          }
+          this.router.navigate(['/home/dashboard']).then(() => {
+            window.location.reload();
+          });
+        }
+      });
+      
+    //   var dialogRef= this.dialog.open(ModalPopupComponent,{ data: {
+    //     message : "Hi, "+ data.userName +" , Welcome to OSC portal",
+    //     title : "Success",
+    //     buttonText : "Ok"
+    //   }});  
+    //   dialogRef.afterClosed().subscribe(
+    //     result => {
+    //      this.returnUrl = result;
+    //      this.router.navigate(['/home/dashboard']).then(() => {
+    //        window.location.reload();
+    //      });
+    //     }
+    //  ); 
         
     },
     error=>{
-      this.error=error;alert(error.error.error_description);
-      var dialogRef =this.dialog.open(ModalPopupComponent,{ data: {
-        message : error.error.error_description,
-        title : "Alert!",
-        buttonText : "Cancel"
-      }});
-      dialogRef.afterClosed().subscribe(result => {
-        this.returnUrl = result;
-        result ? this.router.navigate(['/login']): this.router.navigate(['/login']);
-      });   
+      this.error=error;//alert(error.error.error_description);
+      this.error = error.error.error_description;
+      this.divError = true;
+      // var dialogRef =this.dialog.open(ModalPopupComponent,{ data: {
+      //   message : error.error.error_description,
+      //   title : "Alert!",
+      //   buttonText : "Cancel"
+      // }});
+      // dialogRef.afterClosed().subscribe(result => {
+      //   this.returnUrl = result;
+      //   result ? this.router.navigate(['/login']): this.router.navigate(['/login']);
+      // });   
     });
     
   }

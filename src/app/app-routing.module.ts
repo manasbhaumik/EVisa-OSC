@@ -15,6 +15,7 @@ import { RushlistApplicationComponent } from './components/rushlist-application/
 import { ExtralistApplicationComponent } from './components/extralist-application/extralist-application.component';
 import { PendingListComponent } from './components/pending-list/pending-list.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ApprovedlistComponent } from './components/approvedlist/approvedlist.component';
 
 export const routes: Routes = [
   // {
@@ -30,6 +31,7 @@ export const routes: Routes = [
   { path: 'ordinarylist-application', component: OrdinarylistApplicationComponent },
   { path: 'rushlist-application', component: RushlistApplicationComponent },
   { path: 'extralist-application', component: ExtralistApplicationComponent },
+  { path: 'approvedlist', component: ApprovedlistComponent },
   { path: 'pending-list', component: PendingListComponent },
   {
     path: 'home',

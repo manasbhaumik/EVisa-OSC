@@ -40,7 +40,8 @@
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "src/assets/vendor/bootstrap/js/bootstrap.bundle.js",
               "src/assets/vendor/slimscroll/jquery.slimscroll.js",
-              "src/assets/libs/js/main-js.js"
+              "src/assets/libs/js/main-js.js",
+              "src/assets/libs/js/webcam.js"
              
             ]
           },

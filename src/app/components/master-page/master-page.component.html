@@ -140,15 +140,15 @@
                              aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Home <span class="badge badge-success">6</span></a>
   
                         </li>
-                      <li class="nav-item">
+                      <!-- <li class="nav-item">
                          <a class="nav-link" href="#"  data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Applications</a>
                          <div id="submenu-2" class="collapse submenu">
                              <ul class="nav flex-column">
-                                 <!-- <li class="nav-item">
-                                     <a class="nav-link" routerLink="/home/application/new-application">Apply New Application</a>
-                                 </li> -->
                                  <li class="nav-item">
-                                     <!-- <a class="nav-link" routerLink="/home/application/list-application" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3">Application List</a> -->
+                                     <a class="nav-link" routerLink="/home/application/new-application">Apply New Application</a>
+                                 </li>
+                                 <li class="nav-item">
+                                     
                                      <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3">Application List</a>
                                      <div id="submenu-3" class="collapse submenu">
                                         <ul class="nav flex-column">
@@ -164,6 +164,7 @@
                                         </ul>
                                      </div>
                                  </li>
+                                 
                                  <li class="nav-item">
                                      <a class="nav-link" href="#" routerLink="/walk-in-application">Walk in Applicant List</a>
                                   </li>
@@ -174,41 +175,79 @@
                                      <a class="nav-link" href="#" routerLink="/new-appointment">New Appointment</a>
                                   </li>
                                   <li class="nav-item">
-                                     <a class="nav-link" href="#" routerLink="/visa-approved">Visa Approved List</a>
+                                     <a class="nav-link" href="#" routerLink="/approvedlist">Visa Approved List</a>
                                   </li>
                                   <li class="nav-item">
                                       <a class="nav-link" href="#" routerLink="/visa-reject">Visa Reject List</a>
                                   </li>
                                   <li class="nav-item">
                                     <a class="nav-link" [routerLink]="['/viewbiometric',{applicationId:''}]">View Biometric List</a>
-                                </li>
+                                  </li>
                               </ul>
                          </div>
+                     </li> -->
+                     <li class="nav-item ">
+                        <a class="nav-link" href="#" routerLink="/home/application/list-application" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
+                         class="fab fa-fw fa-wpforms"></i>Application List</a>
+ 
+                     </li>
+                     <li class="nav-item ">
+                        <a class="nav-link" href="#" routerLink="/extralist-application" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
+                         class="fab fa-fw fa-wpforms"></i>Extra Rush</a>
+ 
+                     </li>                     
+                     <li class="nav-item ">
+                        <a class="nav-link" href="#" routerLink="/rushlist-application" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
+                         class="fab fa-fw fa-wpforms"></i>Rush</a>
+ 
+                     </li>
+                     <li class="nav-item ">
+                        <a class="nav-link" href="#" routerLink="/ordinarylist-application" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
+                         class="fab fa-fw fa-wpforms"></i>Ordinary</a>
+ 
                      </li>
   
                      <li class="nav-item ">
-                         <a class="nav-link"  [routerLink]="['/biometric',{applicationId:''}]" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3">
-                            <!-- <a class="nav-link"  routerLink="/biometric" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"> -->
+                         <!-- <a class="nav-link"  [routerLink]="['/biometric',{applicationId:''}]" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"> -->
+                            <a class="nav-link" href="#"  routerLink="/biometric" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3">
                             <i class="fas fa-fw fa-finger-print"></i>Biometric Enrolment</a>
   
                      </li>
+                     <li class="nav-item">
+                        <a class="nav-link" routerLink="/pending-list"><i class="fab fa-fw fa-wpforms"></i>Pending Application Process</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#" routerLink="/approvedlist"><i class="fab fa-fw fa-wpforms"></i>Visa Approved List</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#" routerLink="/walk-in-application" style="pointer-events: none;color:#808080;"><i class="fab fa-fw fa-wpforms"></i>Walk in Applicant List</a>
+                     </li>
+                     
+                     
+                     <li class="nav-item">
+                        <a class="nav-link" href="#" routerLink="/new-appointment" style="pointer-events: none;color:#808080;"><i class="fab fa-fw fa-wpforms"></i>New Appointment</a>
+                     </li>
+                     
+                     <li class="nav-item">
+                         <a class="nav-link" href="#" routerLink="/visa-reject" style="pointer-events: none;color:#808080;"><i class="fab fa-fw fa-wpforms"></i>Visa Reject List</a>
+                     </li>
                      <li class="nav-item ">
-                         <a class="nav-link" href="#" routerLink="/home/administration" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
+                         <a class="nav-link" href="#" routerLink="/home/administration" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4" style="pointer-events: none;color:#808080;"><i
                           class="fab fa-fw fa-wpforms"></i>Administration</a>
   
                       </li>
                       <li class="nav-item">
-                         <a class="nav-link" href="#" routerLink="/home/device-setting" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i
+                         <a class="nav-link" href="#" routerLink="/home/device-setting" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5" style="pointer-events: none;color:#808080;"><i
                           class="fas fa-fw fa-table"></i>Device Settings</a>  
                       </li>
   
                       <li class="nav-item ">
-                         <a class="nav-link" href="#" routerLink="/application-check" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i
+                         <a class="nav-link" href="#" routerLink="/application-check" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4" style="pointer-events: none;color:#808080;"><i
                          class="fab fa-fw fa-wpforms"></i>Check Application Status </a>  
                       </li> 
   
                       <li class="nav-item">
-                         <a class="nav-link" href="#" routerLink="/home/help-support" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i
+                         <a class="nav-link" href="#" routerLink="/home/help-support" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5" style="pointer-events: none;color:#808080;"><i
                          class="fas fa-fw fa-table"></i>Help/Support</a>  
                      </li> 
   

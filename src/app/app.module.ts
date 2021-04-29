@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import {DataTablesModule} from 'angular-datatables';
+//import{ CountdownTimerModule} from 'ngx-countdown-timer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +32,7 @@ import { RushlistApplicationComponent } from './components/rushlist-application/
 import { ExtralistApplicationComponent } from './components/extralist-application/extralist-application.component';
 import { PendingListComponent } from './components/pending-list/pending-list.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ApprovedlistComponent } from './components/approvedlist/approvedlist.component';
 
 
 @NgModule({
@@ -51,7 +53,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     RushlistApplicationComponent,
     ExtralistApplicationComponent,
     PendingListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ApprovedlistComponent
   ],
   imports: [
     BrowserModule,
